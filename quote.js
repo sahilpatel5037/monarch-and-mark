@@ -213,6 +213,27 @@
     });
 
     render();
+
+    // Prefill from a service card or case study: select just that service.
+    window.MMQuote = {
+      select: function (id) {
+        if (!NAMES[id]) return;
+        Object.keys(NAMES).forEach(function (k) {
+          state.on[k] = k === id;
+          const cb = root.querySelector('input[name="q-svc"][value="' + k + '"]');
+          if (cb) cb.checked = k === id;
+        });
+        render();
+        root.dataset.selected = id;
+        root.classList.remove("flash");
+        void root.offsetWidth;
+        root.classList.add("flash");
+        setTimeout(function () { root.classList.remove("flash"); }, 1800);
+      },
+      get state() { return JSON.parse(JSON.stringify(state)); },
+      get total() { return compute().total; }
+    };
+    if (window.MM_PENDING_SERVICE) { window.MMQuote.select(window.MM_PENDING_SERVICE); window.MM_PENDING_SERVICE = null; }
   }
 
   fetch("assets/studio.json", { cache: "no-cache" })

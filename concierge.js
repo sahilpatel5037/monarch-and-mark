@@ -1,6 +1,6 @@
-/* Monarch & Mark — "Monarch Assistant" chat + voice widget.
- * Answers come from /api/chat (Gemini, on Vercel) and fall back to built-in answers
- * drawn from assets/studio.json whenever the AI isn't available. Leads are emailed
+/* Monarch & Mark — "Monarch Concierge" chat + voice widget ("Ask the studio").
+ * Answers come from /api/chat (a Vercel function) and fall back to built-in answers
+ * drawn from assets/studio.json whenever the live service isn't available. Leads are emailed
  * through window.MM.sendBrief (see CONTACT in script.js).
  * Voice: speech-to-text with the browser's SpeechRecognition, replies read aloud with
  * speechSynthesis. The mic only appears where the browser supports it. No cost.
@@ -26,21 +26,21 @@
   wrap.className = "mma";
   wrap.innerHTML =
     '<button class="mma-launch" type="button" aria-expanded="false" aria-controls="mma-panel">' +
-      '<span class="mma-launch-ic">' + CROWN + '</span><span class="mma-launch-t">Ask Monarch</span></button>' +
-    '<section class="mma-panel" id="mma-panel" role="dialog" aria-label="Monarch Assistant" hidden>' +
+      '<span class="mma-launch-ic">' + CROWN + '</span><span class="mma-launch-t">Ask the studio</span></button>' +
+    '<section class="mma-panel" id="mma-panel" role="dialog" aria-label="Monarch Concierge" hidden>' +
       '<header class="mma-head"><span class="mma-av">' + CROWN + '</span>' +
-        '<div class="mma-id"><b>Monarch Assistant</b><small data-mma-sub>AI assistant · replies instantly</small></div>' +
+        '<div class="mma-id"><b>Monarch Concierge</b><small data-mma-sub>Ask the studio · replies instantly</small></div>' +
         '<button class="mma-ic mma-spk" type="button" aria-pressed="false" aria-label="Read replies aloud" title="Read replies aloud">' + SPK_OFF + '</button>' +
-        '<button class="mma-ic mma-x" type="button" aria-label="Close assistant">×</button></header>' +
+        '<button class="mma-ic mma-x" type="button" aria-label="Close concierge">×</button></header>' +
       '<div class="mma-log" role="log" aria-live="polite"></div>' +
       '<div class="mma-chips"></div>' +
       '<form class="mma-form" autocomplete="off">' +
         '<label class="sr" for="mma-in">Message</label>' +
-        '<input id="mma-in" class="mma-in" placeholder="Ask about prices, timelines…" maxlength="600">' +
+        '<input id="mma-in" class="mma-in" placeholder="Ask a question or start your project" maxlength="600">' +
         '<button class="mma-ic mma-mic" type="button" aria-label="Speak your question" title="Speak" hidden>' + MIC + '</button>' +
         '<button class="mma-ic mma-go" type="submit" aria-label="Send">' + SEND + '</button>' +
       '</form>' +
-      '<p class="mma-foot">AI answers can be imperfect. Final prices are confirmed by the studio.</p>' +
+      '<p class="mma-foot">Answers are a guide. Final prices are confirmed by the studio.</p>' +
     '</section>';
   document.body.appendChild(wrap);
 
@@ -55,7 +55,7 @@
   const sub = wrap.querySelector("[data-mma-sub]");
 
   const history = []; // {role, text}
-  let mode = "ai"; // "ai" until the API says otherwise, then "faq"
+  let mode = "live"; // "live" until the API says otherwise, then "faq"
   let brief = null; // active brief-collection state
   let started = false;
   let busy = false;
@@ -76,7 +76,7 @@
   launch.addEventListener("click", function () { panel.hidden ? open() : close(); });
   wrap.querySelector(".mma-x").addEventListener("click", close);
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !panel.hidden) close(); });
-  document.querySelectorAll("[data-open-assistant]").forEach(function (b) {
+  document.querySelectorAll("[data-open-concierge]").forEach(function (b) {
     b.addEventListener("click", function (e) {
       e.preventDefault();
       open();
@@ -99,7 +99,7 @@
     if (on && !t) {
       t = document.createElement("div");
       t.className = "mma-msg mma-bot mma-typing";
-      t.setAttribute("aria-label", "Assistant is typing");
+      t.setAttribute("aria-label", "Concierge is typing");
       t.innerHTML = "<i></i><i></i><i></i>";
       log.appendChild(t);
       log.scrollTop = log.scrollHeight;
@@ -119,7 +119,7 @@
   const DEFAULT_CHIPS = ["Prices", "How long does it take?", "How does it work?", "Start a project"];
 
   function greet() {
-    add("bot", "Hi, I’m Monarch Assistant. Ask me about our websites, logos and pitch decks, or tell me about your project and I’ll pass your brief to the team.");
+    add("bot", "Welcome to Monarch & Mark. Ask a question about our websites, logos and pitch decks, or start your project and I’ll pass your brief to the studio.");
     chips(DEFAULT_CHIPS);
   }
 
@@ -148,7 +148,7 @@
     if (has(" host", " vercel", " netlify", " domain", " live", " launch", " deploy")) return studio.faq.find(function (f) { return f.q === "Going live"; }).a;
     if (has(" website", " site", " landing", " web ", " shopify", " wordpress", " ecommerce")) return w.name + " (from " + money(w.from) + "): " + w.includes.join("; ") + ".";
     if (has(" process", " how does", " how do you", " steps", " work ")) return "Four steps: " + studio.process.join(". ") + ".";
-    if (has(" ai ", " artificial", " chatgpt", " automated", " robot", " human")) return studio.faq.find(function (f) { return f.q === "AI"; }).a + " I’m the studio’s AI assistant.";
+    if (has(" are you a bot", " are you a robot", " are you real", " are you human", " a real person", " automated", " chatbot")) return "I’m the studio’s automated assistant. I can answer questions about services and prices, and pass your brief to the team, who reply personally by email.";
     if (has(" portfolio", " examples", " previous", " clients", " review", " testimonial")) return studio.faq.find(function (f) { return f.q === "Portfolio"; }).a;
     if (has(" fiverr", " pay", " payment", " paypal", " card", " invoice")) return studio.faq.find(function (f) { return f.q === "How do I order?"; }).a;
     if (has(" existing", " already have", " rebrand", " refresh", " redesign")) return studio.faq.find(function (f) { return f.q === "Existing brand"; }).a;
@@ -157,7 +157,7 @@
     return "I can help with our services, prices, timelines and process, or take your project brief for the team. What would you like to know?";
   }
 
-  async function aiAnswer() {
+  async function liveAnswer() {
     try {
       const ctrl = typeof AbortController === "function" ? new AbortController() : null;
       const timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
@@ -179,9 +179,9 @@
 
   async function answer(q) {
     let text = null;
-    if (mode === "ai") {
-      text = await aiAnswer();
-      if (text == null) { mode = "faq"; sub.textContent = "Assistant · quick answers"; }
+    if (mode === "live") {
+      text = await liveAnswer();
+      if (text == null) { mode = "faq"; sub.textContent = "Ask the studio · quick answers"; }
     }
     if (text == null) {
       await getStudio();
@@ -218,7 +218,7 @@
       brief = null;
       add("bot", "No problem, I’ve cancelled that. Ask me anything else.");
       chips(DEFAULT_CHIPS);
-      input.placeholder = "Ask about prices, timelines…";
+      input.placeholder = "Ask a question or start your project";
       return;
     }
     if (brief.step >= STEPS.length) return confirmInput(text);
@@ -244,14 +244,14 @@
     const fields = {
       Name: d.name, Email: d.email, Project: d.type, Budget: d.budget, Deadline: d.deadline, Details: d.details,
       Conversation: history.filter(function (m) { return m.role === "user"; }).map(function (m) { return m.text; }).slice(-8).join(" | "),
-      Source: "Monarch Assistant (chat)"
+      Source: "Monarch Concierge (chat)"
     };
     chips([]);
     typing(true);
     const res = MM.validEmail && MM.sendBrief ? await MM.sendBrief("New chat brief: " + d.type + " (" + d.name + ")", fields) : { ok: false };
     typing(false);
     brief = null;
-    input.placeholder = "Ask about prices, timelines…";
+    input.placeholder = "Ask a question or start your project";
     if (res.ok) {
       add("bot", "Sent! The team has your brief and will reply to " + d.email + " soon. Anything else I can help with?");
       chips(["Prices", "How does it work?"]);
@@ -365,9 +365,9 @@
     listening = false;
     micBtn.classList.remove("on");
     micBtn.setAttribute("aria-label", "Speak your question");
-    if (input.placeholder === "Listening…") input.placeholder = "Ask about prices, timelines…";
+    if (input.placeholder === "Listening…") input.placeholder = "Ask a question or start your project";
   }
   if (!SR) document.querySelectorAll("[data-voice-only]").forEach(function (n) { n.hidden = true; });
 
-  window.MMAssistant = { open: open, close: close, ask: handle, get mode() { return mode; }, get voice() { return !!SR; } };
+  window.MMConcierge = { open: open, close: close, ask: handle, get mode() { return mode; }, get voice() { return !!SR; } };
 })();

@@ -1,15 +1,16 @@
 // Vercel serverless function: POST /api/chat
-// Answers visitor questions for the "Monarch Assistant" chat widget using Google Gemini.
-// Needs the environment variable GEMINI_API_KEY (Vercel → Project → Settings → Environment Variables).
-// Optional: GEMINI_MODEL to pin a model; by default it uses Google's "gemini-flash-latest"
-// alias and falls back to "gemini-flash-lite-latest" if that model is retired or out of free quota.
-// If the key is missing or Gemini fails, it answers { fallback: true } and the widget
-// switches to its built-in FAQ mode, so visitors never see an error.
+// Answers visitor questions for the "Monarch Concierge" chat widget ("Ask the studio")
+// through Google's Generative Language API.
+// Needs the environment variable CHAT_API_KEY (Vercel → Project → Settings → Environment Variables).
+// Optional: CHAT_MODEL to pin a model.
+// If the key is missing or the service fails, it answers { fallback: true } and the widget
+// switches to its built-in quick answers, so visitors never see an error.
 
 const studio = require("../assets/studio.json");
 
-const MODELS = process.env.GEMINI_MODEL
-  ? [process.env.GEMINI_MODEL]
+const PINNED = process.env.CHAT_MODEL || process.env.GEMINI_MODEL; // older variable name still accepted
+const MODELS = PINNED
+  ? [PINNED]
   : ["gemini-flash-latest", "gemini-flash-lite-latest"];
 const MAX_MESSAGES = 14;
 const MAX_CHARS = 1200;
@@ -21,7 +22,7 @@ function systemPrompt() {
   const faq = studio.faq.map(f => `- ${f.q}: ${f.a}`).join("\n");
   const process = studio.process.map(p => `- ${p}`).join("\n");
   return [
-    `You are "Monarch Assistant", the website assistant for ${studio.name}.`,
+    `You are "Monarch Concierge", the website concierge for ${studio.name}. Visitors reach you through the "Ask the studio" button.`,
     studio.about,
     "",
     "SERVICES AND STARTING PRICES (the only prices you may state):",
@@ -36,7 +37,9 @@ function systemPrompt() {
     "RULES:",
     "- Be warm, concise and professional. Reply in 1 to 4 short sentences, plain text, no markdown.",
     "- Never invent prices, discounts, packages, timelines, guarantees, client names, reviews or statistics beyond what is written above. For anything not listed, say the final fixed quote is confirmed after a short brief, and suggest the instant quote calculator on the page.",
-    "- Never claim to make phone calls or to be a human.",
+    "- Speak for the studio in a calm, polished, premium tone. Do not describe yourself, your technology or how you work unless asked. Never bring up models, automation or the technology behind you on your own.",
+    "- Never claim to be a human or a named person, and never claim to make phone calls.",
+    "- If the visitor sincerely asks whether they are talking to a real person or a machine, answer honestly in one sentence: you are the studio's automated assistant, and the team replies personally by email to every brief. Then offer to help or take their brief.",
     "- Do not ask for passwords, payment details or phone numbers.",
     "- If the visitor wants to start a project, get a quote, hire the studio or be contacted, answer briefly and end your reply with the exact token [[BRIEF]] so the widget can collect their details (name, email, project type, budget, deadline).",
     "- If a question is unrelated to the studio's services, politely steer back."
@@ -57,7 +60,7 @@ module.exports = async function handler(req, res) {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "method_not_allowed" });
   }
-  const key = process.env.GEMINI_API_KEY;
+  const key = process.env.CHAT_API_KEY || process.env.GEMINI_API_KEY; // older variable name still accepted
   if (!key) return res.status(200).json({ fallback: true, reason: "not_configured" });
 
   const body = readBody(req);
@@ -95,13 +98,13 @@ module.exports = async function handler(req, res) {
       const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
       const reply = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
       if (r.ok && reply) return res.status(200).json({ reply });
-      console.error("Gemini error", model, r.status, JSON.stringify(data).slice(0, 300));
+      console.error("Concierge model error", model, r.status, JSON.stringify(data).slice(0, 300));
       // A retired model name (404) or a model's quota running out (429) is worth trying the next one.
       if (r.status !== 404 && r.status !== 429) break;
     }
     return res.status(200).json({ fallback: true, reason: "upstream" });
   } catch (err) {
-    console.error("Gemini request failed", String(err));
+    console.error("Concierge request failed", String(err));
     return res.status(200).json({ fallback: true, reason: "upstream" });
   } finally {
     clearTimeout(timer);
