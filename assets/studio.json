@@ -1,0 +1,219 @@
+{
+ "name": "Monarch & Mark",
+ "about": "Independent design studio making websites and landing pages, logos and brand identity kits, and pitch decks for startups and small businesses in the US, UK, Europe and worldwide. Orders are placed through Fiverr or by email. Work is designed from scratch (never templates). Clients receive source files and full commercial rights on completion.",
+ "currency": "USD",
+ "services": [
+  {
+   "id": "website",
+   "name": "Websites & landing pages",
+   "from": 150,
+   "includes": [
+    "Custom design, never a stock template",
+    "Mobile-first, fast and responsive",
+    "Contact form, socials and basic SEO",
+    "Launched on Vercel, Netlify or the client's host",
+    "Clean code the client fully owns"
+   ],
+   "typical_time": "about 3 to 7 days, depending on the number of pages"
+  },
+  {
+   "id": "brand",
+   "name": "Logo & brand identity kit",
+   "from": 80,
+   "includes": [
+    "Original logo concepts to choose from",
+    "Primary, stacked and icon versions",
+    "Colour palette and font pairing",
+    "SVG, PNG and PDF files for web and print",
+    "One-page brand guide"
+   ],
+   "typical_time": "about 2 to 5 days"
+  },
+  {
+   "id": "deck",
+   "name": "Pitch decks & presentations",
+   "from": 100,
+   "includes": [
+    "Story structure shaped with the client",
+    "Custom slides in the client's brand",
+    "Charts, diagrams and icons redrawn",
+    "PowerPoint, Google Slides or PDF",
+    "Speaker-ready layouts"
+   ],
+   "typical_time": "about 3 to 6 days, depending on slide count"
+  }
+ ],
+ "process": [
+  "Discover: short brief, then a fixed quote and delivery date",
+  "Design: first version designed from scratch and shared for review",
+  "Deliver: finished files in the formats needed (live site, logo files, editable deck)",
+  "Revise: included revision rounds until it feels right"
+ ],
+ "faq": [
+  {
+   "q": "How do I order?",
+   "a": "Through our Fiverr profile, or send a brief by email or with the assistant on this site. Fiverr handles payment securely."
+  },
+  {
+   "q": "Revisions",
+   "a": "Every package includes revision rounds (2 as standard; more can be added). The exact number is confirmed in your quote."
+  },
+  {
+   "q": "Ownership",
+   "a": "On completion you receive the source files and full commercial rights."
+  },
+  {
+   "q": "Existing brand",
+   "a": "We can design within your existing logo, colours and fonts, or refresh them."
+  },
+  {
+   "q": "Going live",
+   "a": "We can launch websites on Vercel, Netlify or your existing host and connect your domain."
+  },
+  {
+   "q": "AI",
+   "a": "We use AI tools for research and first drafts. Every design is directed, refined and checked by a person before delivery."
+  },
+  {
+   "q": "Portfolio",
+   "a": "The projects shown on the site are concept work for fictional brands. Client projects will be added as they are delivered."
+  }
+ ],
+ "quote": {
+  "note": "Estimates only. The final fixed price is confirmed before any work starts.",
+  "website": {
+   "base": 150,
+   "pages": [
+    {
+     "label": "1-page landing",
+     "add": 0
+    },
+    {
+     "label": "Up to 3 pages",
+     "add": 90
+    },
+    {
+     "label": "Up to 5 pages",
+     "add": 180
+    },
+    {
+     "label": "Up to 8 pages",
+     "add": 320
+    }
+   ],
+   "extras": [
+    {
+     "id": "copy",
+     "label": "Copywriting",
+     "add": 40
+    },
+    {
+     "id": "seo",
+     "label": "SEO setup",
+     "add": 30
+    },
+    {
+     "id": "cms",
+     "label": "Blog / CMS",
+     "add": 80
+    },
+    {
+     "id": "launch",
+     "label": "Domain & launch",
+     "add": 20
+    }
+   ]
+  },
+  "brand": {
+   "base": 80,
+   "concepts": [
+    {
+     "label": "2 logo concepts",
+     "add": 0
+    },
+    {
+     "label": "3 logo concepts",
+     "add": 30
+    },
+    {
+     "label": "5 logo concepts",
+     "add": 60
+    }
+   ],
+   "extras": [
+    {
+     "id": "kit",
+     "label": "Full brand guide",
+     "add": 60
+    },
+    {
+     "id": "social",
+     "label": "Social media kit",
+     "add": 40
+    },
+    {
+     "id": "stationery",
+     "label": "Business card & letterhead",
+     "add": 35
+    }
+   ]
+  },
+  "deck": {
+   "base": 100,
+   "slides": [
+    {
+     "label": "Up to 10 slides",
+     "add": 0
+    },
+    {
+     "label": "Up to 15 slides",
+     "add": 50
+    },
+    {
+     "label": "Up to 20 slides",
+     "add": 100
+    },
+    {
+     "label": "Up to 30 slides",
+     "add": 180
+    }
+   ],
+   "extras": [
+    {
+     "id": "story",
+     "label": "Story & copy help",
+     "add": 50
+    },
+    {
+     "id": "charts",
+     "label": "Custom charts & icons",
+     "add": 30
+    }
+   ]
+  },
+  "revisions": [
+   {
+    "label": "2 rounds (standard)",
+    "add": 0
+   },
+   {
+    "label": "4 rounds",
+    "add_per_service": 25
+   }
+  ],
+  "speed": [
+   {
+    "label": "Standard",
+    "mult": 1
+   },
+   {
+    "label": "Priority",
+    "mult": 1.25
+   },
+   {
+    "label": "Rush",
+    "mult": 1.5
+   }
+  ]
+ }
+}
