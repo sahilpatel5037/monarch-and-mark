@@ -134,6 +134,13 @@
     if (!studio) return "I can help with services, prices, timelines and how we work, or I can take your project brief.";
     if (has(" hire", " start", " quote", " brief", " order", " book", " interested", " work with", " get started", " contact me", " call me")) return "BRIEF";
     if (has(" hi ", " hello", " hey", " good morning", " good evening")) return "Hello! I can answer questions about our websites, logos and brand kits, and pitch decks, or take your brief. What are you working on?";
+    const vid = studio.video_editing;
+    const isVideo = has(" video", " videos", " editing", " editor", " youtube", " shorts", " reel", " reels", " footage", " thumbnail", " caption", " subtitle", " voiceover");
+    if (vid && isVideo) {
+      if (has(" price", " cost", " how much", " pricing", " rate", " budget", " cheap", " expensive", " $")) return "Video editing is quoted per project, based on the length of the video and the footage. Send a short brief and we’ll reply with a fixed quote before any work starts.";
+      if (has(" long", " time", " timeline", " days", " deadline", " fast", " quick", " urgent", " deliver", " turnaround")) return "Typical turnaround for video: " + vid.typical_time + ". Your exact date is agreed before we start.";
+      return "Video editing: " + vid.includes.join("; ") + ". Files are delivered through Google Drive in clean folders, and every project is quoted after a short brief. You can see examples in the Video editing section of this page.";
+    }
     if (has(" price", " cost", " how much", " pricing", " rate", " budget", " cheap", " expensive", " $")) {
       if (has(" logo", " brand", " identity")) return "Logo & brand kits start from " + money(b.from) + " USD. That includes " + b.includes.slice(0, 3).join(", ").toLowerCase() + ". Try the instant quote calculator on this page for a live estimate.";
       if (has(" deck", " pitch", " presentation", " slide")) return "Pitch decks start from " + money(d.from) + " USD, depending on the number of slides. The instant quote calculator on this page gives you a live estimate.";

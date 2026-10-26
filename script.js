@@ -173,6 +173,34 @@ const CONTACT = {
     });
   });
 
+
+  // Video examples: load the YouTube player only when a visitor presses play
+  document.querySelectorAll("[data-yt]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (b.classList.contains("playing")) return;
+      const id = b.getAttribute("data-yt");
+      const f = document.createElement("iframe");
+      f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&rel=0&modestbranding=1&playsinline=1";
+      f.title = b.getAttribute("data-yt-title") || "Video";
+      f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+      f.setAttribute("allowfullscreen", "");
+      f.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      b.classList.add("playing");
+      b.appendChild(f);
+    });
+  });
+
+  // "Get a quote" for services without a calculator: preselect the project type in the contact form
+  document.querySelectorAll("[data-contact-type]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      const sel = document.getElementById("f-type");
+      const want = a.getAttribute("data-contact-type");
+      if (sel) Array.prototype.forEach.call(sel.options, function (o) { if (o.text === want) sel.value = o.value || o.text; });
+      const card = a.closest(".svc");
+      if (card) { card.classList.add("flash"); setTimeout(function () { card.classList.remove("flash"); }, 1600); }
+    });
+  });
+
   // Case study modal for concept work
   const dlg = document.getElementById("case");
   const cards = Array.prototype.slice.call(document.querySelectorAll(".work-card"));

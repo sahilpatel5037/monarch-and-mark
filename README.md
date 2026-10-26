@@ -1,6 +1,6 @@
 # Monarch & Mark — studio website
 
-Portfolio and sales site for **Monarch & Mark**, an independent design studio for websites and landing pages, logos and brand identity kits, and pitch decks.
+Portfolio and sales site for **Monarch & Mark**, an independent design studio for websites and landing pages, logos and brand identity kits, pitch decks, and video editing (YouTube long-form and Shorts).
 
 Plain static HTML, CSS and JavaScript, plus one optional serverless function for the concierge chat. No build step, no framework, no dependencies.
 
@@ -70,3 +70,7 @@ The add-on prices in the quote calculator (extra pages, logo concepts, slides, e
 - Mark: a crown drawn as an "M", over a single line (the "mark")
 
 © 2026 Monarch & Mark
+
+## Video editing section
+
+The Video editing section (`#video-editing`) shows two examples from AfterDark Archives, the studio's own YouTube channel. Thumbnails are local files in `assets/video/`; the YouTube player loads only when a visitor presses play. To swap an example, change the `data-yt` video ID, the thumbnail and the caption in `index.html`. Video editing has no published price: its "Get a quote" buttons open the contact form with "Video editing" preselected.

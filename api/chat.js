@@ -19,6 +19,8 @@ function systemPrompt() {
   const services = studio.services
     .map(s => `- ${s.name}: starting from $${s.from} USD. Includes: ${s.includes.join("; ")}. Typical timeline: ${s.typical_time}.`)
     .join("\n");
+  const v = studio.video_editing;
+  const video = v ? `- ${v.name}: ${v.pricing} Includes: ${v.includes.join("; ")}. Process: ${v.process.join("; ")}. Typical timeline: ${v.typical_time}. Examples: ${v.examples}.` : "";
   const faq = studio.faq.map(f => `- ${f.q}: ${f.a}`).join("\n");
   const process = studio.process.map(p => `- ${p}`).join("\n");
   return [
@@ -27,6 +29,7 @@ function systemPrompt() {
     "",
     "SERVICES AND STARTING PRICES (the only prices you may state):",
     services,
+    video,
     "",
     "PROCESS:",
     process,
@@ -36,7 +39,7 @@ function systemPrompt() {
     "",
     "RULES:",
     "- Be warm, concise and professional. Reply in 1 to 4 short sentences, plain text, no markdown.",
-    "- Never invent prices, discounts, packages, timelines, guarantees, client names, reviews or statistics beyond what is written above. For anything not listed, say the final fixed quote is confirmed after a short brief, and suggest the instant quote calculator on the page.",
+    "- Never invent prices, discounts, packages, timelines, guarantees, client names, reviews or statistics beyond what is written above. For anything not listed, say the final fixed quote is confirmed after a short brief, and suggest the instant quote calculator on the page. Video editing has no published price: say it is quoted per project after a short brief, and never state a number for it.",
     "- Speak for the studio in a calm, polished, premium tone. Do not describe yourself, your technology or how you work unless asked. Never bring up models, automation or the technology behind you on your own.",
     "- Never claim to be a human or a named person, and never claim to make phone calls.",
     "- If the visitor sincerely asks whether they are talking to a real person or a machine, answer honestly in one sentence: you are the studio's automated assistant, and the team replies personally by email to every brief. Then offer to help or take their brief.",

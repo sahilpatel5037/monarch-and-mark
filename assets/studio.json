@@ -1,6 +1,6 @@
 {
  "name": "Monarch & Mark",
- "about": "Independent design studio making websites and landing pages, logos and brand identity kits, and pitch decks for startups and small businesses in the US, UK, Europe and worldwide. Orders are placed through Fiverr or by email. Work is designed from scratch (never templates). Clients receive source files and full commercial rights on completion.",
+ "about": "Independent design studio making websites and landing pages, logos and brand identity kits, pitch decks, and video editing (YouTube long-form and Shorts) for startups, creators and small businesses in the US, UK, Europe and worldwide. Orders are placed through Fiverr or by email. Work is designed from scratch (never templates). Clients receive source files and full commercial rights on completion.",
  "currency": "USD",
  "services": [
   {
@@ -211,5 +211,25 @@
     "mult": 1.5
    }
   ]
+ },
+ "video_editing": {
+  "name": "Video editing",
+  "pricing": "Quoted per project (depends on video length and footage). No fixed starting price is published.",
+  "includes": [
+   "YouTube long-form and Shorts editing",
+   "Documentary and explainer edits with voiceover",
+   "Captions and subtitles",
+   "Sound design and music",
+   "Thumbnails",
+   "Colour and pacing"
+  ],
+  "process": [
+   "Brief: footage, script or idea, plus a style reference; fixed quote and delivery date",
+   "First cut: full edit shared as a private preview link",
+   "Revisions: timestamped notes, included rounds turned around quickly",
+   "Delivery: final files through Google Drive in clean, labelled folders"
+  ],
+  "typical_time": "Shorts usually 1 to 2 days, long-form videos 3 to 7 days, depending on length and footage",
+  "examples": "AfterDark Archives, the studio's own YouTube channel (https://youtu.be/PsCeGBGWwNM and https://youtube.com/shorts/CzLse9y-hh4)"
  }
 }
