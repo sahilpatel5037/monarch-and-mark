@@ -15,7 +15,7 @@ test("title, viewport and landmarks", () => {
 
 test("all hub links present", () => {
   const need = [
-    "https://afterdark-archives.sites.tab.bot/", "https://afterdark-studio.sites.tab.bot/", "https://afterdark-studio.sites.tab.bot/plan/",
+    "https://afterdark-archives.sites.tab.bot/",
     "https://www.roblox.com/games/91110462194238", "https://niftynine.sites.tab.bot/",
     "https://sahntro.sites.tab.bot/", "https://www.fiverr.com/sahilpatel420", "mailto:sahilpatel5037@gmail.com",
   ];
@@ -23,6 +23,8 @@ test("all hub links present", () => {
   assert.ok(!/discord\.gg|discord\.com\/invite/i.test(html), "no public Discord invite");
   assert.ok(!/youtube\.com|youtu\.be/i.test(html), "no links out to YouTube");
   assert.ok(!html.includes("own Discord server"), "no Discord server mention");
+  assert.ok(!/afterdark-studio\.sites\.tab\.bot/i.test(html), "no links to the internal AfterDark Studio dashboard");
+  for (const f of ["assets/work/afterdark-studio.jpg", "assets/work/afterdark-plan.jpg"]) assert.ok(!fs.existsSync(path.join(SITE, f)), "internal dashboard screenshot shipped: " + f);
 });
 
 test("services listed", () => {
