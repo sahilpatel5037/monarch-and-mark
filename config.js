@@ -8,6 +8,6 @@ window.MM_CONFIG = {
 
   /* WhatsApp chat button: put the number with country code, digits only (e.g. "91XXXXXXXXXX").
      Leave empty to hide the button on the live site. */
-  WHATSAPP_NUMBER: "",
-  WHATSAPP_TEXT: "Hi Monarch & Mark, I'd like to start a project."
+  WHATSAPP_NUMBER: "919016000452",
+  WHATSAPP_TEXT: "Hi Monarch & Mark, I'd like to discuss a project"
 };
