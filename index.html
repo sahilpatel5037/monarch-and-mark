@@ -1,87 +1,436 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex, nofollow">
-<title>Monarch &amp; Mark | Upgrading</title>
-<meta name="theme-color" content="#06080F">
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%230E1626%22/%3E%3Cg%20transform%3D%22translate%286.4%207%29%20scale%28.8%29%22%3E%3Cpath%20d%3D%22M12%2050%20V21%20L22.5%2035%20L32%2016%20L41.5%2035%20L52%2021%20V50%22%20fill%3D%22none%22%20stroke%3D%22%23C9A45C%22%20stroke-width%3D%224.4%22%20stroke-linejoin%3D%22miter%22%20stroke-miterlimit%3D%2210%22%20stroke-linecap%3D%22square%22/%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2214.5%22%20r%3D%222.4%22%20fill%3D%22%23C9A45C%22/%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%229.5%22%20r%3D%222.4%22%20fill%3D%22%23C9A45C%22/%3E%3Ccircle%20cx%3D%2252%22%20cy%3D%2214.5%22%20r%3D%222.4%22%20fill%3D%22%23C9A45C%22/%3E%3Cpath%20d%3D%22M8%2056.5%20H56%22%20stroke%3D%22%23C9A45C%22%20stroke-width%3D%221.8%22/%3E%3C/g%3E%3C/svg%3E">
-<style>
-*{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{display:grid;place-items:center;min-height:100vh;min-height:100svh;padding:32px 22px;background:#06080F;color:#EEE8DC;font:400 16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;-webkit-font-smoothing:antialiased;overflow:hidden}
-.bg{position:fixed;inset:-20%;background:radial-gradient(40% 35% at 30% 30%,rgba(22,33,61,.95),transparent 70%),radial-gradient(35% 30% at 72% 68%,rgba(30,42,78,.8),transparent 70%),radial-gradient(30% 25% at 60% 25%,rgba(196,161,98,.10),transparent 70%);animation:drift 22s ease-in-out infinite alternate;pointer-events:none}
-canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
-.glow{position:fixed;left:50%;top:40%;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:radial-gradient(circle,rgba(196,161,98,.17),transparent 62%);animation:b 7s ease-in-out infinite;pointer-events:none}
-main{position:relative;width:min(560px,100%)}
-.live{display:inline-flex;align-items:center;gap:10px;padding:8px 15px;border:1px solid rgba(91,211,139,.35);border-radius:999px;background:rgba(91,211,139,.06);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#9FE6BC;margin-bottom:34px;animation:up .9s ease both}
-.live b{color:#5BD38B;font-weight:700}
-.dot{width:8px;height:8px;border-radius:50%;background:#5BD38B;animation:p 1.8s infinite}
-.crown{display:block;margin:0 auto;width:84px;height:84px;filter:drop-shadow(0 10px 28px rgba(196,161,98,.45));animation:f 6s ease-in-out infinite,up .9s ease .1s both}
-.brand{margin:14px 0 0;font:600 26px/1.1 "Cormorant Garamond",Georgia,"Times New Roman",serif;letter-spacing:.04em;animation:up .9s ease .2s both}
-.brand i{color:#C4A162;font-weight:500}
-.line{width:56px;height:1px;margin:26px auto;background:linear-gradient(90deg,transparent,#C4A162,transparent);animation:up .9s ease .3s both}
-h1{margin:0;font:500 clamp(36px,8vw,58px)/1.05 "Cormorant Garamond",Georgia,"Times New Roman",serif;animation:up 1s ease .35s both}
-h1 em{display:inline-block;font-style:italic;background:linear-gradient(100deg,#E4CA92 0%,#C4A162 40%,#FFF1CF 52%,#C4A162 64%,#E4CA92 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 5s ease-in-out infinite}
-p.sub{margin:16px 0 0;color:rgba(238,232,220,.68);font-size:16px;animation:up 1s ease .45s both}
-.work{margin:34px auto 0;width:min(360px,100%);animation:up 1s ease .55s both}
-.bar{position:relative;height:3px;border-radius:3px;background:rgba(238,232,220,.08);overflow:hidden}
-.bar span{position:absolute;top:0;bottom:0;width:40%;border-radius:3px;background:linear-gradient(90deg,transparent,#C4A162,#FFF1CF,#C4A162,transparent);animation:load 2.2s cubic-bezier(.6,.1,.4,.9) infinite}
-.msg{position:relative;height:24px;margin-top:14px;font-size:13.5px;letter-spacing:.06em;color:#C4A162}
-.msg span{position:absolute;inset:0;transition:opacity .6s ease,transform .6s ease}
-.msg span.out{opacity:0;transform:translateY(8px)}
-.time{margin:22px 0 0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,232,220,.42);animation:up 1s ease .65s both}
-@keyframes drift{0%{transform:translate(0,0) rotate(0)}100%{transform:translate(4%,-3%) rotate(6deg)}}
-@keyframes b{50%{transform:scale(1.1);opacity:.75}}
-@keyframes f{50%{transform:translateY(-6px)}}
-@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes sheen{0%,100%{background-position:100% 0}50%{background-position:0 0}}
-@keyframes load{0%{left:-40%}100%{left:100%}}
-@keyframes p{0%{box-shadow:0 0 0 0 rgba(91,211,139,.6)}70%{box-shadow:0 0 0 10px rgba(91,211,139,0)}100%{box-shadow:0 0 0 0 rgba(91,211,139,0)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}canvas{display:none}}
-</style>
+<title>Monarch &amp; Mark | Creative Studio for YouTube, Video, Websites, Roblox &amp; Discord</title>
+<meta name="description" content="Monarch & Mark is an independent creative studio: YouTube automation and production, short-form video editing, websites and web apps, Roblox games, Discord setups and social media content. Home of AfterDark Archives, DON'T ANSWER, Nifty Nine and SAHNTRO.">
+<meta name="theme-color" content="#070A12">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Monarch &amp; Mark">
+<meta property="og:title" content="Monarch &amp; Mark | Crafted to be remembered">
+<meta property="og:description" content="Video, YouTube, websites, Discord and Roblox, from the studio behind AfterDark Archives and DON'T ANSWER.">
+<meta property="og:image" content="og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/CormorantGaramond-normal-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Manrope-normal-400-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/fonts.css?v=hub1">
+<link rel="stylesheet" href="styles.css?v=v4">
+<script src="config.js?v=v4"></script>
+<script src="countdown.js?v=v4"></script>
+<script src="script.js?v=v4" defer></script>
 </head>
 <body>
-<div class="bg" aria-hidden="true"></div>
-<canvas aria-hidden="true"></canvas>
-<div class="glow" aria-hidden="true"></div>
-<main>
-  <p class="live"><span class="dot" aria-hidden="true"></span><b>Live</b> &mdash; Systems upgrading</p>
-  <svg class="crown" viewBox="0 0 64 64" width="96" height="96" aria-hidden="true">
-    <defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#B08A48"/><stop offset=".42" stop-color="#C4A162"/><stop offset=".5" stop-color="#FFF1CF"/><stop offset=".58" stop-color="#C4A162"/><stop offset="1" stop-color="#B08A48"/>
-      <animateTransform class="smil" attributeName="gradientTransform" type="translate" values="-64 0;64 0;64 0" keyTimes="0;.55;1" dur="4s" repeatCount="indefinite"/>
-    </linearGradient></defs>
-    <path d="M12 50 V21 L22.5 35 L32 16 L41.5 35 L52 21 V50" fill="none" stroke="url(#g)" stroke-width="3.2" stroke-linejoin="miter" stroke-miterlimit="10" stroke-linecap="square"/>
-    <circle cx="12" cy="14.5" r="2.4" fill="url(#g)"/><circle cx="32" cy="9.5" r="2.4" fill="url(#g)"/><circle cx="52" cy="14.5" r="2.4" fill="url(#g)"/>
-    <path d="M8 56.5 H56" stroke="url(#g)" stroke-width="1.6"/></svg>
-  <p class="brand">Monarch <i>&amp;</i> Mark</p>
-  <div class="line" aria-hidden="true"></div>
-  <h1>We&rsquo;re upgrading. <em>Back soon.</em></h1>
-  <p class="sub">The site is temporarily unavailable while we prepare something new.</p>
-  <div class="work">
-    <div class="bar" aria-hidden="true"><span></span></div>
-    <p class="msg" aria-live="polite"><span>Optimising servers&hellip;</span></p>
+<div class="launch" id="launch" role="dialog" aria-modal="true" aria-labelledby="launch-title" hidden>
+  <canvas class="launch-dust" aria-hidden="true"></canvas>
+  <div class="launch-glow" aria-hidden="true"></div>
+  <div class="launch-in">
+    <img class="launch-crown" src="assets/monarch-mark.png" alt="" width="320" height="335">
+    <p class="launch-brand">Monarch <i>&amp;</i> Mark</p>
+    <h1 class="launch-title" id="launch-title">Something remarkable <em>is coming.</em></h1>
+    <p class="launch-sub">The new studio opens in</p>
+    <div class="timer" role="timer" aria-live="off">
+      <div class="tu"><span class="tv" data-u="d">00</span><span class="tl">Days</span></div>
+      <span class="tsep" aria-hidden="true">:</span>
+      <div class="tu"><span class="tv" data-u="h">00</span><span class="tl">Hours</span></div>
+      <span class="tsep" aria-hidden="true">:</span>
+      <div class="tu"><span class="tv" data-u="m">00</span><span class="tl">Minutes</span></div>
+      <span class="tsep" aria-hidden="true">:</span>
+      <div class="tu"><span class="tv" data-u="s">00</span><span class="tl">Seconds</span></div>
+    </div>
+    <p class="launch-date" id="launch-date"></p>
+    <div class="launch-links">
+      <a href="mailto:sahilpatel5037@gmail.com?subject=Project%20enquiry%20%E2%80%94%20Monarch%20%26%20Mark">Email the studio</a>
+      <span aria-hidden="true">&middot;</span>
+      <a href="https://www.fiverr.com/sahilpatel420" target="_blank" rel="noopener">Fiverr</a>
+    </div>
   </div>
-  <p class="time"><span id="clock">Last updated just now</span></p>
+  <div class="curtain c-top" aria-hidden="true"></div>
+  <div class="curtain c-bot" aria-hidden="true"></div>
+</div>
+<div class="progress" aria-hidden="true"><span></span></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav" id="top">
+  <div class="nav-in wrap">
+    <a class="brand" href="#top" aria-label="Monarch &amp; Mark, home">
+      <img src="assets/monarch-mark.png" alt="" width="34" height="36">
+      <span class="brand-word">Monarch <i>&amp;</i> Mark</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="nav-cta">Start a project</a>
+    </nav>
+    <button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <canvas class="hero-dust" aria-hidden="true"></canvas>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="hero-grid wrap">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="dot"></span>Independent creative studio</p>
+      <h1 id="hero-title" class="hero-title">Crafted to be <em>remembered.</em></h1>
+      <p class="hero-lede">Monarch &amp; Mark is the studio behind a horror YouTube channel, a Roblox game and a family of live websites. We bring that same craft to your brand: YouTube automation, short-form video, websites, Roblox games, Discord setups and social content.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold" href="#contact">Start a project</a>
+        <a class="btn btn-ghost" href="#work">Explore our work</a>
+      </div>
+      <ul class="hero-disc" aria-label="What we do">
+        <li>YouTube</li><li>Video</li><li>Websites</li><li>Roblox</li><li>Discord</li><li>Social</li>
+      </ul>
+    </div>
+    <div class="hero-stage" aria-hidden="true">
+      <div class="stage-card sc-1"><img src="assets/work/afterdark-episode.jpg" alt="" width="1200" height="675"></div>
+      <div class="stage-card sc-2"><img src="assets/work/niftynine.jpg" alt="" width="1200" height="750"></div>
+      <div class="stage-card sc-3"><img src="assets/work/dont-answer.jpg" alt="" width="768" height="432"></div>
+      <div class="stage-card sc-4"><img src="assets/work/radhe-casters.jpg" alt="" width="1200" height="750"></div>
+      <div class="stage-crown"><img src="assets/monarch-mark.png" alt="" width="320" height="335"></div>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#house" aria-label="Scroll to the Monarch &amp; Mark directory"><span></span></a>
+</section>
+
+<section class="house" id="house" aria-labelledby="house-title">
+  <div class="wrap">
+    <h2 id="house-title" class="house-label">The house of Monarch &amp; Mark</h2>
+    <ul class="house-list">
+      <li><a href="https://afterdark-archives.sites.tab.bot/" target="_blank" rel="noopener"><span class="hn">01</span><span class="ht">AfterDark Archives</span><span class="hk">YouTube channel</span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://www.roblox.com/games/91110462194238" target="_blank" rel="noopener"><span class="hn">02</span><span class="ht">DON&rsquo;T ANSWER</span><span class="hk">Roblox game</span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://niftynine.sites.tab.bot/" target="_blank" rel="noopener"><span class="hn">03</span><span class="ht">Nifty Nine</span><span class="hk">Product finds</span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://radhe-casters.vercel.app/" target="_blank" rel="noopener"><span class="hn">04</span><span class="ht">Radhe Casters</span><span class="hk">Business website</span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://sahntro.sites.tab.bot/" target="_blank" rel="noopener"><span class="hn">05</span><span class="ht">SAHNTRO</span><span class="hk">Community platform</span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="stats" id="stats" aria-labelledby="stats-title">
+  <div class="wrap">
+    <header class="stats-head reveal">
+      <p class="kicker">Live numbers</p>
+      <h2 id="stats-title">Real work, <em>really live.</em></h2>
+      <p class="stats-asof">As of 30 Oct 2026</p>
+    </header>
+    <ul class="stat-grid">
+      <li class="stat reveal"><span class="stat-n" data-count="5">5</span><span class="stat-l">Videos published on AfterDark Archives</span><span class="stat-s">3 long-form episodes + 2 Shorts</span></li>
+      <li class="stat reveal"><span class="stat-n" data-count="5">5</span><span class="stat-l">Live projects you can open today</span><span class="stat-s">Channel, game and 3 websites</span></li>
+      <li class="stat reveal"><span class="stat-n" data-count="15">15</span><span class="stat-l">Playable stages in DON&rsquo;T ANSWER</span><span class="stat-s">Our Roblox horror game</span></li>
+      <li class="stat reveal"><span class="stat-n" data-count="110">110</span><span class="stat-l">Product models on the Radhe site we built</span><span class="stat-s">With sizes, loads and rates</span></li>
+    </ul>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>YouTube automation</span><i>&#10022;</i><span>Short-form editing</span><i>&#10022;</i><span>Websites &amp; web apps</span><i>&#10022;</i><span>Roblox games</span><i>&#10022;</i><span>Discord setups</span><i>&#10022;</i><span>Social media content</span><i>&#10022;</i>
+    <span>YouTube automation</span><i>&#10022;</i><span>Short-form editing</span><i>&#10022;</i><span>Websites &amp; web apps</span><i>&#10022;</i><span>Roblox games</span><i>&#10022;</i><span>Discord setups</span><i>&#10022;</i><span>Social media content</span><i>&#10022;</i>
+  </div>
+</div>
+
+<section class="section work" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">Our work &amp; ventures</p>
+      <h2 id="work-title">We don&rsquo;t just make it for others. <em>We run our own.</em></h2>
+      <p class="sec-lede">Every project below is live right now, built by the studio. Tap any of them to see it for yourself.</p>
+    </header>
+
+    <article class="feature reveal" aria-labelledby="ad-title">
+      <div class="feature-media">
+        <a class="media main-media" href="https://afterdark-archives.sites.tab.bot/#watch" target="_blank" rel="noopener" aria-label="Watch Don&rsquo;t Pick Up the Call at 3:00 AM on the AfterDark Archives site">
+          <img src="assets/work/afterdark-episode.jpg" alt="Thumbnail of the AfterDark Archives episode Don&rsquo;t Pick Up the Call at 3:00 AM" width="1200" height="675" loading="lazy">
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+          <span class="media-tag">Episode 01</span>
+        </a>
+        <div class="mini-row">
+          <a class="media mini" href="https://afterdark-archives.sites.tab.bot/#watch" target="_blank" rel="noopener" aria-label="Watch 3 Terrifying Night Train Horror Stories on the AfterDark Archives site">
+            <img src="assets/work/afterdark-night-train.jpg" alt="Thumbnail of the Night Train episode" width="1200" height="675" loading="lazy">
+            <span class="mini-cap">Night Train</span>
+          </a>
+          <a class="media mini" href="https://afterdark-archives.sites.tab.bot/#watch" target="_blank" rel="noopener" aria-label="Watch an AfterDark teaser Short on the AfterDark Archives site">
+            <img src="assets/work/afterdark-short.jpg" alt="Still from an AfterDark Archives teaser Short" width="960" height="600" loading="lazy">
+            <span class="mini-cap">Teaser Shorts</span>
+          </a>
+          <a class="media mini" href="https://afterdark-archives.sites.tab.bot/#make" target="_blank" rel="noopener" aria-label="See what we make for AfterDark Archives">
+            <img src="assets/work/afterdark-channel.jpg" alt="AfterDark Archives channel banner" width="1200" height="675" loading="lazy">
+            <span class="mini-cap">What we make</span>
+          </a>
+        </div>
+      </div>
+      <div class="feature-body">
+        <p class="tag">YouTube channel &middot; Horror narration</p>
+        <h3 id="ad-title">AfterDark Archives</h3>
+        <p>Our own horror storytelling channel. Every episode is scripted, voiced, edited, scored and published by the studio, then cut into vertical Shorts.</p>
+        <ul class="ticks">
+          <li>Long-form episodes with cinematic visuals</li>
+          <li>Voiceover, sound design and music</li>
+          <li>Shorts cut from every episode</li>
+          <li>Planned, scheduled release calendar</li>
+        </ul>
+        <div class="links">
+          <a class="lk lk-gold" href="https://afterdark-archives.sites.tab.bot/#watch" target="_blank" rel="noopener">Watch AfterDark<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a class="lk" href="https://afterdark-archives.sites.tab.bot/" target="_blank" rel="noopener">See the channel<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </article>
+
+    <div class="cards">
+      <article class="card reveal" aria-labelledby="da-title">
+        <a class="media" href="https://www.roblox.com/games/91110462194238" target="_blank" rel="noopener" aria-label="Play DON&rsquo;T ANSWER on Roblox">
+          <img src="assets/work/dont-answer.jpg" alt="DON&rsquo;T ANSWER game thumbnail on Roblox" width="768" height="432" loading="lazy">
+          <span class="media-tag">Roblox &middot; 16+</span>
+        </a>
+        <div class="card-body">
+          <p class="tag">Roblox game</p>
+          <h3 id="da-title">DON&rsquo;T ANSWER</h3>
+          <p>A co-op horror game spun out of an AfterDark story. Fifteen stages across three parts, fake checkpoints, a flashlight, a trail shop, daily rewards and a leaderboard, playable solo or with up to nine friends.</p>
+          <div class="links">
+            <a class="lk lk-gold" href="https://www.roblox.com/games/91110462194238" target="_blank" rel="noopener">Play on Roblox<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal" aria-labelledby="nn-title">
+        <a class="media" href="https://niftynine.sites.tab.bot/" target="_blank" rel="noopener" aria-label="Visit Nifty Nine">
+          <img src="assets/work/niftynine.jpg" alt="Screenshot of the Nifty Nine home page" width="1200" height="750" loading="lazy">
+          <span class="media-tag">Website</span>
+        </a>
+        <div class="card-body">
+          <p class="tag">Animated product-finds site</p>
+          <h3 id="nn-title">Nifty Nine</h3>
+          <p>Honest gadget picks for students and young workers in India, most under &#8377;999. Every pick has one clear take, the good and the catch, with categories, guides and live stock in a playful, animated interface.</p>
+          <div class="links"><a class="lk lk-gold" href="https://niftynine.sites.tab.bot/" target="_blank" rel="noopener">Visit Nifty Nine<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" aria-labelledby="rc-title">
+        <a class="media" href="https://radhe-casters.vercel.app/" target="_blank" rel="noopener" aria-label="Visit the Radhe Caster Wheels website">
+          <img src="assets/work/radhe-casters.jpg" alt="Screenshot of the Radhe Caster Wheels home page" width="1200" height="750" loading="lazy">
+          <span class="media-tag">Website</span>
+        </a>
+        <div class="card-body">
+          <p class="tag">Business website</p>
+          <h3 id="rc-title">Radhe Caster Wheels</h3>
+          <p>A product website for an Ahmedabad caster wheel manufacturer: 110 models from 40 to 500 mm, each with load capacity and rates, built to turn visitors into enquiries.</p>
+          <div class="links"><a class="lk lk-gold" href="https://radhe-casters.vercel.app/" target="_blank" rel="noopener">Visit the site<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </div>
+      </article>
+
+      <article class="card reveal" aria-labelledby="sa-title">
+        <a class="media" href="https://sahntro.sites.tab.bot/" target="_blank" rel="noopener" aria-label="Visit SAHNTRO">
+          <img src="assets/work/sahntro.jpg" alt="Screenshot of the SAHNTRO home page" width="1200" height="750" loading="lazy">
+          <span class="media-tag">Website</span>
+        </a>
+        <div class="card-body">
+          <p class="tag">Community platform</p>
+          <h3 id="sa-title">SAHNTRO</h3>
+          <p>A home for a truck-sim driving community: convoys, events, driver profiles and virtual trucking companies in one place, with one-tap Steam sign-in.</p>
+          <div class="links"><a class="lk lk-gold" href="https://sahntro.sites.tab.bot/" target="_blank" rel="noopener">Visit SAHNTRO<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section services" id="services" aria-labelledby="services-title">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">Services</p>
+      <h2 id="services-title">One studio. <em>Every screen your audience lives on.</em></h2>
+      <p class="sec-lede">The same skills that run our own channel, game and sites, now working for you.</p>
+    </header>
+    <div class="svc-grid">
+      <article class="svc reveal" id="youtube">
+        <span class="svc-n">01</span>
+        <h3>YouTube automation &amp; production</h3>
+        <p>Your channel run end to end: scripts, voiceover, editing, thumbnails, titles, descriptions and scheduled uploads on a steady release calendar.</p>
+        <ul class="chips"><li>Scripting</li><li>Voiceover</li><li>Thumbnails</li><li>Scheduling</li></ul>
+        <a class="lk lk-sm" href="https://afterdark-archives.sites.tab.bot/" target="_blank" rel="noopener">We run AfterDark Archives<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc reveal" id="video-editing">
+        <span class="svc-n">02</span>
+        <h3>Short-form video editing</h3>
+        <p>Vertical Shorts and reels that hold attention from the first second, with captions, music, sound effects and a strong hook.</p>
+        <ul class="chips"><li>9:16</li><li>Captions</li><li>Music &amp; SFX</li><li>Hooks</li></ul>
+        <a class="lk lk-sm" href="https://afterdark-archives.sites.tab.bot/#watch" target="_blank" rel="noopener">See a Short we made<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc reveal" id="websites">
+        <span class="svc-n">03</span>
+        <h3>Websites &amp; web apps</h3>
+        <p>Custom, mobile-first websites and web apps designed from scratch. Fast, polished and launched on your own domain, with code you fully own.</p>
+        <ul class="chips"><li>Design</li><li>Build</li><li>Mobile-first</li><li>Launch</li></ul>
+        <a class="lk lk-sm" href="https://radhe-casters.vercel.app/" target="_blank" rel="noopener">See the Radhe site<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc reveal" id="roblox">
+        <span class="svc-n">04</span>
+        <h3>Roblox games</h3>
+        <p>Playable Roblox experiences with level design, game systems, shops, rewards and leaderboards, ready for players.</p>
+        <ul class="chips"><li>Level design</li><li>Game systems</li><li>Shops &amp; rewards</li></ul>
+        <a class="lk lk-sm" href="https://www.roblox.com/games/91110462194238" target="_blank" rel="noopener">Play DON&rsquo;T ANSWER<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </article>
+      <article class="svc reveal" id="discord">
+        <span class="svc-n">05</span>
+        <h3>Discord setups</h3>
+        <p>Servers set up properly, with channels, roles, permissions and welcome flows, plus custom bots built around how your community works.</p>
+        <ul class="chips"><li>Server setup</li><li>Roles</li><li>Custom bots</li></ul>
+      </article>
+      <article class="svc reveal" id="social">
+        <span class="svc-n">06</span>
+        <h3>Social media content</h3>
+        <p>Reels, posts and captions planned as a calendar and made in your brand&rsquo;s voice, so your pages stay active without the daily scramble.</p>
+        <ul class="chips"><li>Reels</li><li>Posts</li><li>Captions</li><li>Calendar</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">Packages</p>
+      <h2 id="pricing-title">Pick a starting point. <em>We shape the rest.</em></h2>
+      <p class="sec-lede">Every project gets a fixed quote before work begins. 50% upfront to start, 50% on delivery.</p>
+    </header>
+    <div class="plans">
+      <article class="plan reveal">
+        <p class="plan-name">Starter</p>
+        <p class="plan-for">A sharp first website for a new or local business.</p>
+        <p class="plan-price"><span class="from">Starting from</span><strong>$120</strong><span class="alt">&#8377;10,000 in India</span></p>
+        <ul class="plan-list"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Custom, mobile-first design</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Contact form and WhatsApp button</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Launched on your domain</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Source files are yours</span></li></ul>
+        <a class="btn btn-ghost plan-cta" href="#contact" data-plan="Starter">Choose Starter</a>
+      </article>
+      <article class="plan plan-hi reveal">
+        <span class="plan-badge">Recommended</span>
+        <p class="plan-name">Growth</p>
+        <p class="plan-for">A bigger site or web app, plus content to keep it moving.</p>
+        <p class="plan-price"><span class="from">Pricing</span><strong class="q">Get a quote</strong><span class="alt">Based on pages and features</span></p>
+        <ul class="plan-list"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Multi-page website or web app</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Short-form videos or social posts</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Discord server setup if you need one</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Priority updates while we build</span></li></ul>
+        <a class="btn btn-gold plan-cta" href="#contact" data-plan="Growth">Get a Growth quote</a>
+      </article>
+      <article class="plan reveal">
+        <p class="plan-name">Pro</p>
+        <p class="plan-for">A channel, game or brand run by the studio, month after month.</p>
+        <p class="plan-price"><span class="from">Pricing</span><strong class="q">Get a quote</strong><span class="alt">Monthly or per project</span></p>
+        <ul class="plan-list"><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>YouTube automation and production</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Roblox game development</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Social media content calendar</span></li><li><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>One studio for every screen</span></li></ul>
+        <a class="btn btn-ghost plan-cta" href="#contact" data-plan="Pro">Get a Pro quote</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section process" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">How we work</p>
+      <h2 id="process-title">Clear from the first message <em>to the final file.</em></h2>
+    </header>
+    <ol class="steps">
+      <li class="step reveal"><span class="step-n">01</span><h3>Brief</h3><p>Tell us what you need. You get a clear plan, timeline and quote before any work starts.</p></li>
+      <li class="step reveal"><span class="step-n">02</span><h3>Build</h3><p>We make the first version and share it early, so you can steer while it takes shape.</p></li>
+      <li class="step reveal"><span class="step-n">03</span><h3>Refine</h3><p>Revisions are part of every project. We polish until it feels right to you.</p></li>
+      <li class="step reveal"><span class="step-n">04</span><h3>Launch</h3><p>Delivered in the formats you need, live on your channel, server or domain. The files are yours.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="section about" id="about" aria-labelledby="about-title">
+  <div class="wrap about-grid">
+    <div class="about-mark reveal" aria-hidden="true"><img src="assets/monarch-mark.png" alt="" width="320" height="335" loading="lazy"></div>
+    <div class="about-copy reveal">
+      <p class="kicker">About the studio</p>
+      <h2 id="about-title">A studio that ships <em>its own work.</em></h2>
+      <p>Monarch &amp; Mark is an independent creative studio based in India, working with clients worldwide by email and through Fiverr. Everything on this page is live: a horror channel we write and publish, a Roblox game with its own community, and websites real people use.</p>
+      <p>When you hire us, you get the same hands, the same standards and the same attention to detail.</p>
+      <ul class="values">
+        <li><strong>Made from scratch</strong><span>No stock templates. Every project starts from your goals.</span></li>
+        <li><strong>Straight talk</strong><span>A clear quote, a clear date and honest updates along the way.</span></li>
+        <li><strong>Yours to keep</strong><span>Source files and full rights to the finished work.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq" aria-labelledby="faq-title">
+  <div class="wrap faq-wrap">
+    <header class="sec-head reveal">
+      <p class="kicker">FAQ</p>
+      <h2 id="faq-title">Good <em>questions.</em></h2>
+    </header>
+    <div class="faq-list">
+      <details class="reveal"><summary>How do I start a project?</summary><p>Send us the form below, email us, or order through our Fiverr profile. We reply with a plan, a timeline and a fixed quote before anything begins.</p></details>
+      <details class="reveal"><summary>How does payment work?</summary><p>50% upfront to start and 50% on delivery. Your quote is fixed before any work begins.</p></details>
+      <details class="reveal"><summary>How long does a project take?</summary><p>It depends on the scope. You get an agreed delivery date up front, before any work starts.</p></details>
+      <details class="reveal"><summary>Are revisions included?</summary><p>Yes. Every project includes revisions, and the exact number is confirmed in your quote.</p></details>
+      <details class="reveal"><summary>Do I own the final work?</summary><p>Yes. On completion you receive the files and full rights to use them for your business or channel.</p></details>
+      <details class="reveal"><summary>Can you put it live for me?</summary><p>Yes. We can publish videos to your channel, launch websites on your domain and set up bots on your Discord server.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="contact-glow" aria-hidden="true"></div>
+  <div class="wrap contact-grid">
+    <div class="contact-copy reveal">
+      <img class="contact-crown" src="assets/monarch-mark.png" alt="" width="320" height="335" loading="lazy">
+      <p class="kicker">Start a project</p>
+      <h2 id="contact-title">Let&rsquo;s make something <em>remarkable.</em></h2>
+      <p class="sec-lede">Tell us about your channel, game, community or brand. We reply with a plan and a fixed quote.</p>
+      <div class="contact-cta">
+        <a class="btn btn-wa" data-wa hidden href="#contact"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.4-.3z"/></svg><span>Chat on WhatsApp</span></a>
+        <a class="btn btn-ghost" href="https://www.fiverr.com/sahilpatel420" target="_blank" rel="noopener">Hire us on Fiverr<svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <p class="mail-line"><a href="mailto:sahilpatel5037@gmail.com">sahilpatel5037@gmail.com</a><button type="button" class="copy" data-copy="sahilpatel5037@gmail.com">Copy</button></p>
+    </div>
+    <form class="brief reveal" id="brief" novalidate>
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Full name"></div>
+      <div class="field"><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@company.com"></div>
+      <div class="field"><label for="f-svc">What do you need?</label>
+        <select id="f-svc" name="service">
+          <option>YouTube automation &amp; production</option><option>Short-form video editing</option><option selected>Website or web app</option><option>Roblox game</option><option>Discord setup</option><option>Social media content</option><option>Something else</option>
+        </select></div>
+      <div class="field"><label for="f-plan">Package</label>
+        <select id="f-plan" name="plan"><option>Not sure yet</option><option>Starter</option><option>Growth</option><option>Pro</option></select></div>
+      <div class="field field-wide"><label for="f-msg">Tell us about the project</label><textarea id="f-msg" name="message" rows="4" required placeholder="Goals, links, deadline, budget"></textarea></div>
+      <button class="btn btn-gold field-wide" type="submit">Send brief</button>
+      <p class="brief-note field-wide" role="status">Opens your email app with the brief filled in.</p>
+    </form>
+  </div>
+</section>
+
 </main>
-<script>
-(function(){
-  var calm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var lines=["Optimising servers\u2026","Polishing design\u2026","Tuning animations\u2026","Checking every page\u2026","Almost there\u2026"],i=0,box=document.querySelector(".msg span");
-  if(!calm)setInterval(function(){box.classList.add("out");setTimeout(function(){i=(i+1)%lines.length;box.textContent=lines[i];box.classList.remove("out");},600);},2800);
-  var ck=document.getElementById("clock"),fmt;
-  try{fmt=new Intl.DateTimeFormat("en-IN",{timeZone:"Asia/Kolkata",hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true});}catch(e){}
-  function t(){if(fmt)ck.textContent=fmt.format(new Date()).toUpperCase()+" IST \u00b7 Updated just now";}
-  t();setInterval(t,1000);
-  if(calm)return;
-  var c=document.querySelector("canvas"),x=c.getContext("2d"),d=Math.min(devicePixelRatio||1,2),W,H,P=[];
-  function sz(){W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);var n=Math.min(80,Math.round(W*H/14000));P=[];for(var k=0;k<n;k++)P.push(s(1));}
-  function s(a){return{x:Math.random()*W,y:a?Math.random()*H:H+8,r:.5+Math.random()*1.8,v:.15+Math.random()*.45,p:Math.random()*6.3,q:.005+Math.random()*.012,o:.25+Math.random()*.6};}
-  function loop(){x.clearRect(0,0,W,H);for(var k=0;k<P.length;k++){var e=P[k];e.y-=e.v;e.p+=e.q;e.x+=Math.sin(e.p)*.3;if(e.y<-8)P[k]=e=s(0);var a=e.o*(.55+.45*Math.sin(e.p*3));x.fillStyle="rgba(228,202,146,"+a.toFixed(3)+")";x.beginPath();x.arc(e.x,e.y,e.r,0,6.283);x.fill();}requestAnimationFrame(loop);}
-  sz();addEventListener("resize",sz);requestAnimationFrame(loop);
-})();
-</script>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="#top"><img src="assets/monarch-mark.png" alt="" width="34" height="36" loading="lazy"><span class="brand-word">Monarch <i>&amp;</i> Mark</span></a>
+      <p>Independent creative studio for YouTube, video, websites, Roblox, Discord and social content.</p>
+    </div>
+    <nav class="foot-col" aria-label="Studio">
+      <h2>Studio</h2>
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#contact">Contact</a><span class="soon">Careers <em>Coming soon</em></span>
+    </nav>
+    <nav class="foot-col" aria-label="Our work">
+      <h2>Our work</h2>
+      <a href="https://afterdark-archives.sites.tab.bot/" target="_blank" rel="noopener">AfterDark Archives</a><a href="https://www.roblox.com/games/91110462194238" target="_blank" rel="noopener">DON&rsquo;T ANSWER</a><a href="https://niftynine.sites.tab.bot/" target="_blank" rel="noopener">Nifty Nine</a><a href="https://radhe-casters.vercel.app/" target="_blank" rel="noopener">Radhe Casters</a><a href="https://sahntro.sites.tab.bot/" target="_blank" rel="noopener">SAHNTRO</a>
+    </nav>
+    <nav class="foot-col" aria-label="Contact">
+      <h2>Contact</h2>
+      <a href="mailto:sahilpatel5037@gmail.com">Email</a><a href="https://www.fiverr.com/sahilpatel420" target="_blank" rel="noopener">Fiverr</a>
+    </nav>
+  </div>
+  <div class="wrap foot-base"><span>&copy; <span id="yr">2026</span> Monarch &amp; Mark. All rights reserved.</span><a href="#top">Back to top &uarr;</a></div>
+</footer>
+
+<a class="wa-float" data-wa hidden href="#contact" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.3-.4.3-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 001.8-1.2 2.2 2.2 0 00.1-1.2c0-.1-.2-.2-.4-.3z"/></svg></a>
 </body>
 </html>
