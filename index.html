@@ -10,33 +10,78 @@
 <style>
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
-body{display:grid;place-items:center;min-height:100vh;min-height:100svh;padding:32px 22px;background:radial-gradient(900px 600px at 50% 38%,rgba(22,33,61,.95),transparent 70%),#06080F;color:#EEE8DC;font:400 16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;-webkit-font-smoothing:antialiased;overflow:hidden}
-.glow{position:fixed;left:50%;top:40%;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:radial-gradient(circle,rgba(196,161,98,.16),transparent 62%);animation:b 7s ease-in-out infinite;pointer-events:none}
-main{position:relative;max-width:560px}
-.crown{width:84px;height:84px;filter:drop-shadow(0 10px 28px rgba(196,161,98,.45));animation:f 6s ease-in-out infinite}
-.brand{margin:14px 0 0;font:600 26px/1.1 "Cormorant Garamond",Georgia,"Times New Roman",serif;letter-spacing:.04em}
+body{display:grid;place-items:center;min-height:100vh;min-height:100svh;padding:32px 22px;background:#06080F;color:#EEE8DC;font:400 16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;text-align:center;-webkit-font-smoothing:antialiased;overflow:hidden}
+.bg{position:fixed;inset:-20%;background:radial-gradient(40% 35% at 30% 30%,rgba(22,33,61,.95),transparent 70%),radial-gradient(35% 30% at 72% 68%,rgba(30,42,78,.8),transparent 70%),radial-gradient(30% 25% at 60% 25%,rgba(196,161,98,.10),transparent 70%);animation:drift 22s ease-in-out infinite alternate;pointer-events:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.glow{position:fixed;left:50%;top:40%;width:620px;height:620px;margin:-310px 0 0 -310px;border-radius:50%;background:radial-gradient(circle,rgba(196,161,98,.17),transparent 62%);animation:b 7s ease-in-out infinite;pointer-events:none}
+main{position:relative;width:min(560px,100%)}
+.live{display:inline-flex;align-items:center;gap:10px;padding:8px 15px;border:1px solid rgba(91,211,139,.35);border-radius:999px;background:rgba(91,211,139,.06);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#9FE6BC;margin-bottom:34px;animation:up .9s ease both}
+.live b{color:#5BD38B;font-weight:700}
+.dot{width:8px;height:8px;border-radius:50%;background:#5BD38B;animation:p 1.8s infinite}
+.crown{display:block;margin:0 auto;width:84px;height:84px;filter:drop-shadow(0 10px 28px rgba(196,161,98,.45));animation:f 6s ease-in-out infinite,up .9s ease .1s both}
+.brand{margin:14px 0 0;font:600 26px/1.1 "Cormorant Garamond",Georgia,"Times New Roman",serif;letter-spacing:.04em;animation:up .9s ease .2s both}
 .brand i{color:#C4A162;font-weight:500}
-.line{width:56px;height:1px;margin:28px auto;background:linear-gradient(90deg,transparent,#C4A162,transparent)}
-h1{margin:0;font:500 clamp(36px,8vw,58px)/1.05 "Cormorant Garamond",Georgia,"Times New Roman",serif}
-h1 em{font-style:italic;color:#E4CA92}
-p.sub{margin:18px 0 0;color:rgba(238,232,220,.68);font-size:16px}
-.status{display:inline-flex;align-items:center;gap:10px;margin-top:32px;padding:9px 16px;border:1px solid rgba(196,161,98,.35);border-radius:999px;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:#C4A162}
-.status span{width:7px;height:7px;border-radius:50%;background:#C4A162;animation:p 2s infinite}
-@keyframes b{50%{transform:scale(1.08);opacity:.8}}
+.line{width:56px;height:1px;margin:26px auto;background:linear-gradient(90deg,transparent,#C4A162,transparent);animation:up .9s ease .3s both}
+h1{margin:0;font:500 clamp(36px,8vw,58px)/1.05 "Cormorant Garamond",Georgia,"Times New Roman",serif;animation:up 1s ease .35s both}
+h1 em{display:inline-block;font-style:italic;background:linear-gradient(100deg,#E4CA92 0%,#C4A162 40%,#FFF1CF 52%,#C4A162 64%,#E4CA92 100%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 5s ease-in-out infinite}
+p.sub{margin:16px 0 0;color:rgba(238,232,220,.68);font-size:16px;animation:up 1s ease .45s both}
+.work{margin:34px auto 0;width:min(360px,100%);animation:up 1s ease .55s both}
+.bar{position:relative;height:3px;border-radius:3px;background:rgba(238,232,220,.08);overflow:hidden}
+.bar span{position:absolute;top:0;bottom:0;width:40%;border-radius:3px;background:linear-gradient(90deg,transparent,#C4A162,#FFF1CF,#C4A162,transparent);animation:load 2.2s cubic-bezier(.6,.1,.4,.9) infinite}
+.msg{position:relative;height:24px;margin-top:14px;font-size:13.5px;letter-spacing:.06em;color:#C4A162}
+.msg span{position:absolute;inset:0;transition:opacity .6s ease,transform .6s ease}
+.msg span.out{opacity:0;transform:translateY(8px)}
+.time{margin:22px 0 0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(238,232,220,.42);animation:up 1s ease .65s both}
+@keyframes drift{0%{transform:translate(0,0) rotate(0)}100%{transform:translate(4%,-3%) rotate(6deg)}}
+@keyframes b{50%{transform:scale(1.1);opacity:.75}}
 @keyframes f{50%{transform:translateY(-6px)}}
-@keyframes p{0%{box-shadow:0 0 0 0 rgba(196,161,98,.55)}70%{box-shadow:0 0 0 9px rgba(196,161,98,0)}100%{box-shadow:0 0 0 0 rgba(196,161,98,0)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+@keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes sheen{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+@keyframes load{0%{left:-40%}100%{left:100%}}
+@keyframes p{0%{box-shadow:0 0 0 0 rgba(91,211,139,.6)}70%{box-shadow:0 0 0 10px rgba(91,211,139,0)}100%{box-shadow:0 0 0 0 rgba(91,211,139,0)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}canvas{display:none}}
 </style>
 </head>
 <body>
+<div class="bg" aria-hidden="true"></div>
+<canvas aria-hidden="true"></canvas>
 <div class="glow" aria-hidden="true"></div>
 <main>
-  <svg class="crown" viewBox="0 0 64 64" width="96" height="96" aria-hidden="true"><path d="M12 50 V21 L22.5 35 L32 16 L41.5 35 L52 21 V50" fill="none" stroke="#C4A162" stroke-width="3.2" stroke-linejoin="miter" stroke-miterlimit="10" stroke-linecap="square"/><circle cx="12" cy="14.5" r="2.4" fill="#C4A162"/><circle cx="32" cy="9.5" r="2.4" fill="#C4A162"/><circle cx="52" cy="14.5" r="2.4" fill="#C4A162"/><path d="M8 56.5 H56" stroke="#C4A162" stroke-width="1.6"/></svg>
+  <p class="live"><span class="dot" aria-hidden="true"></span><b>Live</b> &mdash; Systems upgrading</p>
+  <svg class="crown" viewBox="0 0 64 64" width="96" height="96" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="64" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#B08A48"/><stop offset=".42" stop-color="#C4A162"/><stop offset=".5" stop-color="#FFF1CF"/><stop offset=".58" stop-color="#C4A162"/><stop offset="1" stop-color="#B08A48"/>
+      <animateTransform class="smil" attributeName="gradientTransform" type="translate" values="-64 0;64 0;64 0" keyTimes="0;.55;1" dur="4s" repeatCount="indefinite"/>
+    </linearGradient></defs>
+    <path d="M12 50 V21 L22.5 35 L32 16 L41.5 35 L52 21 V50" fill="none" stroke="url(#g)" stroke-width="3.2" stroke-linejoin="miter" stroke-miterlimit="10" stroke-linecap="square"/>
+    <circle cx="12" cy="14.5" r="2.4" fill="url(#g)"/><circle cx="32" cy="9.5" r="2.4" fill="url(#g)"/><circle cx="52" cy="14.5" r="2.4" fill="url(#g)"/>
+    <path d="M8 56.5 H56" stroke="url(#g)" stroke-width="1.6"/></svg>
   <p class="brand">Monarch <i>&amp;</i> Mark</p>
   <div class="line" aria-hidden="true"></div>
   <h1>We&rsquo;re upgrading. <em>Back soon.</em></h1>
   <p class="sub">The site is temporarily unavailable while we prepare something new.</p>
-  <p class="status"><span aria-hidden="true"></span>Under maintenance</p>
+  <div class="work">
+    <div class="bar" aria-hidden="true"><span></span></div>
+    <p class="msg" aria-live="polite"><span>Optimising servers&hellip;</span></p>
+  </div>
+  <p class="time"><span id="clock">Last updated just now</span></p>
 </main>
+<script>
+(function(){
+  var calm=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var lines=["Optimising servers\u2026","Polishing design\u2026","Tuning animations\u2026","Checking every page\u2026","Almost there\u2026"],i=0,box=document.querySelector(".msg span");
+  if(!calm)setInterval(function(){box.classList.add("out");setTimeout(function(){i=(i+1)%lines.length;box.textContent=lines[i];box.classList.remove("out");},600);},2800);
+  var ck=document.getElementById("clock"),fmt;
+  try{fmt=new Intl.DateTimeFormat("en-IN",{timeZone:"Asia/Kolkata",hour:"numeric",minute:"2-digit",second:"2-digit",hour12:true});}catch(e){}
+  function t(){if(fmt)ck.textContent=fmt.format(new Date()).toUpperCase()+" IST \u00b7 Updated just now";}
+  t();setInterval(t,1000);
+  if(calm)return;
+  var c=document.querySelector("canvas"),x=c.getContext("2d"),d=Math.min(devicePixelRatio||1,2),W,H,P=[];
+  function sz(){W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);var n=Math.min(80,Math.round(W*H/14000));P=[];for(var k=0;k<n;k++)P.push(s(1));}
+  function s(a){return{x:Math.random()*W,y:a?Math.random()*H:H+8,r:.5+Math.random()*1.8,v:.15+Math.random()*.45,p:Math.random()*6.3,q:.005+Math.random()*.012,o:.25+Math.random()*.6};}
+  function loop(){x.clearRect(0,0,W,H);for(var k=0;k<P.length;k++){var e=P[k];e.y-=e.v;e.p+=e.q;e.x+=Math.sin(e.p)*.3;if(e.y<-8)P[k]=e=s(0);var a=e.o*(.55+.45*Math.sin(e.p*3));x.fillStyle="rgba(228,202,146,"+a.toFixed(3)+")";x.beginPath();x.arc(e.x,e.y,e.r,0,6.283);x.fill();}requestAnimationFrame(loop);}
+  sz();addEventListener("resize",sz);requestAnimationFrame(loop);
+})();
+</script>
 </body>
 </html>
