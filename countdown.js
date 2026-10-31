@@ -80,6 +80,8 @@
     try {
       dateEl.textContent = new Intl.DateTimeFormat("en-IN", { timeZone: "Asia/Kolkata", weekday: "long", day: "numeric", month: "long", year: "numeric", hour: "numeric", minute: "2-digit", hour12: true }).format(new Date(target)).replace(/\b(am|pm)\b/, function (m) { return m.toUpperCase(); }) + " IST";
     } catch (e) {}
+    var noteEl = document.getElementById("launch-note");
+    if (noteEl && C.LAUNCH_NOTE) { noteEl.textContent = C.LAUNCH_NOTE; noteEl.hidden = false; }
     var dust = window.MMDust(el.querySelector(".launch-dust"), { max: 110, density: 11000, mouseTarget: el });
     var done = false, timer = 0;
 
