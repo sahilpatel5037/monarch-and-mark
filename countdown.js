@@ -53,6 +53,69 @@
     return { stop: pause, start: start };
   };
 
+
+  /* ---- background film (v7): shared by the countdown and the hero ----
+     Portrait screens get the 9:16 clip, wide screens the 16:9 one. The slow ambient film plays even with reduced
+     motion (only dust/flare motion is dropped). The source is swapped ONLY when the portrait/wide choice really
+     changes (debounced, so a phone's address bar showing/hiding never reloads the clip); play() is retried on
+     loadeddata/canplay, on a short watchdog and on any touch/tap/scroll (Low Power Mode / data saver refuse
+     autoplay until a gesture); the poster stays underneath so the screen is never blank. */
+  window.MMFilm = function (box) {
+    var film = box && box.querySelector("video");
+    if (!film) return { stop: function () {} };
+    var wideNow = null, stopped = false, tries = 0, dog = 0, rz = 0, seen = true;
+    function play() {
+      if (stopped || !seen || !film.getAttribute("src")) return;
+      if (!film.paused && film.readyState > 2) return;
+      film.muted = true;
+      try { var p = film.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
+    }
+    var gestures = ["touchstart", "touchend", "pointerdown", "click", "scroll", "keydown"];
+    function onGesture() { play(); }
+    function gestureOff() { gestures.forEach(function (g) { document.removeEventListener(g, onGesture, true); window.removeEventListener(g, onGesture, true); }); }
+    function set() {
+      var wide = !(window.matchMedia && window.matchMedia("(max-aspect-ratio: 1/1)").matches);
+      if (wide === wideNow) return; wideNow = wide;
+      var poster = film.getAttribute(wide ? "data-poster-w" : "data-poster-p");
+      if (poster) { box.style.backgroundImage = "url(\"" + poster + "\")"; film.poster = poster; }
+      if (stopped) return;
+      var src = film.getAttribute(wide ? "data-src-w" : "data-src-p");
+      if (film.getAttribute("src") === src) { play(); return; }
+      film.classList.remove("on");
+      film.muted = true; film.defaultMuted = true; film.setAttribute("muted", ""); film.setAttribute("playsinline", ""); film.setAttribute("webkit-playsinline", "");
+      film.autoplay = true; film.setAttribute("autoplay", ""); film.preload = "auto";
+      film.setAttribute("src", src); film.load(); play();
+    }
+    function onResize() { clearTimeout(rz); rz = setTimeout(set, 250); }
+    function onVis() { if (!document.hidden) play(); }
+    film.addEventListener("playing", function () { film.classList.add("on"); gestureOff(); });
+    film.addEventListener("loadeddata", play);
+    film.addEventListener("canplay", play);
+    film.addEventListener("error", function () { film.classList.remove("on"); });
+    set();
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+    document.addEventListener("visibilitychange", onVis);
+    window.addEventListener("pageshow", play);
+    gestures.forEach(function (g) { document.addEventListener(g, onGesture, { capture: true, passive: true }); });
+    window.addEventListener("scroll", onGesture, { capture: true, passive: true });
+    dog = setInterval(function () { if (stopped || ++tries > 20) { clearInterval(dog); return; } play(); }, 1500);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) {
+      seen = e[0].isIntersecting;
+      if (seen) play(); else if (!film.paused) { try { film.pause(); } catch (x) {} }
+    }).observe(box);
+    return {
+      play: play,
+      stop: function () {
+        stopped = true; clearInterval(dog); gestureOff();
+        window.removeEventListener("resize", onResize); window.removeEventListener("orientationchange", onResize);
+        document.removeEventListener("visibilitychange", onVis); window.removeEventListener("pageshow", play);
+        try { film.pause(); } catch (e) {}
+        film.removeAttribute("src"); try { film.load(); } catch (e) {}
+      }
+    };
+  };
+
   /* ---- countdown ---- */
   var C = window.MM_CONFIG || {};
   var q; try { q = new URLSearchParams(location.search); } catch (e) { q = { get: function () { return null; } }; }
@@ -83,6 +146,7 @@
     var noteEl = document.getElementById("launch-note");
     if (noteEl && C.LAUNCH_NOTE) { noteEl.textContent = C.LAUNCH_NOTE; noteEl.hidden = false; }
     var dust = window.MMDust(el.querySelector(".launch-dust"), { max: 110, density: 11000, mouseTarget: el });
+    var film = window.MMFilm(el.querySelector(".launch-film"));
     var done = false, timer = 0;
 
     function set(u, v) {
@@ -102,7 +166,7 @@
       setTimeout(function () {
         el.classList.add("open"); root.classList.add("cd-reveal");
         setTimeout(function () {
-          dust.stop(); el.remove(); root.classList.remove("cd-on", "cd-reveal");
+          dust.stop(); film.stop(); el.remove(); root.classList.remove("cd-on", "cd-reveal");
           window.MM_COUNTDOWN = false;
           document.dispatchEvent(new CustomEvent("mm:launched"));
         }, calm ? 50 : 1700);

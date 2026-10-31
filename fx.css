@@ -1,0 +1,48 @@
+/* Monarch & Mark — background extras (preview). All layers sit above the film, below the copy. */
+.fx-layer{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none;contain:strict}
+.hero > .fx-layer{z-index:0}
+/* 1 · floating line icons */
+.fx-ic{position:absolute;left:0;top:0;width:var(--s,48px);height:var(--s,48px);opacity:var(--o,.15);will-change:transform}
+.fx-ic svg{display:block;width:100%;height:100%;fill:none;stroke:#C4A162;stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round;animation:fxDrift var(--d,24s) ease-in-out var(--dl,0s) infinite alternate}
+@keyframes fxDrift{0%{transform:translate3d(0,0,0) rotate(calc(var(--r,6deg) * -1))}50%{transform:translate3d(var(--dx,18px),calc(var(--dy,-22px) * .5),0) rotate(0deg)}100%{transform:translate3d(calc(var(--dx,18px) * -.4),var(--dy,-22px),0) rotate(var(--r,6deg))}}
+/* 3 · pointer glow + trail (desktop) / slow auto glow (touch) */
+.fx-glow{position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;z-index:210;pointer-events:none;background:radial-gradient(circle,rgba(228,202,146,.16) 0%,rgba(196,161,98,.07) 34%,rgba(196,161,98,0) 68%);mix-blend-mode:screen;opacity:0;transition:opacity .6s;will-change:transform}
+.fx-glow.on{opacity:1}
+.fx-trail{position:fixed;inset:0;width:100vw;height:100vh;z-index:211;pointer-events:none}
+.fx-auto{position:absolute;left:50%;top:50%;width:90vmax;height:90vmax;margin:-45vmax 0 0 -45vmax;border-radius:50%;background:radial-gradient(circle,rgba(228,202,146,.13) 0%,rgba(196,161,98,.05) 30%,rgba(196,161,98,0) 60%);animation:fxWander 26s ease-in-out infinite;will-change:transform}
+@keyframes fxWander{0%,100%{transform:translate3d(-22vw,-16vh,0)}25%{transform:translate3d(20vw,-8vh,0)}50%{transform:translate3d(14vw,18vh,0)}75%{transform:translate3d(-18vw,12vh,0)}}
+/* 4 · gold shimmer sweep across the countdown numbers */
+@property --fxsx{syntax:'<percentage>';inherits:true;initial-value:160%}
+.fx-shimmer .tu{animation:fxSweep 5.5s cubic-bezier(.45,0,.25,1) 1.6s infinite}
+.fx-shimmer .tu:nth-child(3){animation-delay:1.75s}.fx-shimmer .tu:nth-child(5){animation-delay:1.9s}.fx-shimmer .tu:nth-child(7){animation-delay:2.05s}
+.fx-shimmer .tv{background-image:linear-gradient(105deg,rgba(255,250,236,0) 38%,rgba(255,248,228,.98) 50%,rgba(255,250,236,0) 62%),linear-gradient(180deg,#F7E7C2,var(--gold) 75%);background-size:260% 100%,100% 100%;background-repeat:no-repeat;background-position:var(--fxsx) 0,0 0}
+@keyframes fxSweep{0%,58%{--fxsx:160%}100%{--fxsx:-60%}}
+/* 2 · dotted world map + arcs */
+.fx-map{position:absolute;inset:0;width:100%;height:100%}
+.launch .fx-map{opacity:.95}
+/* 5 · monogram reveal */
+.fx-mono{position:absolute;left:50%;top:50%;width:min(92vmin,860px);height:min(92vmin,860px);transform:translate(-50%,-50%);opacity:.11}
+.hero .fx-mono{left:auto;right:4%;top:52%;transform:translate(0,-50%);width:min(52vmin,520px);height:min(52vmin,520px);opacity:.12}
+.fx-mono svg{width:100%;height:100%;overflow:visible}
+.fx-mono .mp{fill:none;stroke:#D9BC80;stroke-width:.85;stroke-linejoin:miter;stroke-linecap:square;stroke-dasharray:1;stroke-dashoffset:1;animation:fxDraw 3.4s cubic-bezier(.6,.05,.25,1) .5s forwards}
+.fx-mono .mb{stroke-width:.5;animation-delay:3.1s;animation-duration:1.4s}
+.fx-mono .md{fill:#E4CA92;opacity:0;transform-box:fill-box;transform-origin:center;animation:fxDot .9s var(--ease) forwards}
+.fx-mono .md:nth-of-type(1){animation-delay:2.7s}.fx-mono .md:nth-of-type(2){animation-delay:2.95s}.fx-mono .md:nth-of-type(3){animation-delay:3.2s}
+.fx-mono .mg{opacity:0;animation:fxGlowIn 2s ease 3.6s forwards,fxBreath 7s ease-in-out 5.6s infinite}
+@keyframes fxDraw{to{stroke-dashoffset:0}}
+@keyframes fxDot{from{opacity:0;transform:scale(.2)}to{opacity:1;transform:none}}
+@keyframes fxGlowIn{to{opacity:.55}}
+@keyframes fxBreath{0%,100%{opacity:.55}50%{opacity:1}}
+.fx-mono.done{animation:fxMonoBreath 7s ease-in-out infinite}
+@keyframes fxMonoBreath{0%,100%{opacity:.11}50%{opacity:.17}}
+.hero .fx-mono.done{animation-name:fxMonoBreathH}
+@keyframes fxMonoBreathH{0%,100%{opacity:.12}50%{opacity:.18}}
+@media (max-width:1080px){.hero .fx-mono{right:50%;transform:translate(50%,-50%);width:78vmin;height:78vmin;opacity:.09;top:46%}@keyframes fxMonoBreathH{0%,100%{opacity:.09}50%{opacity:.13}}}
+/* reduced motion: extras stay, but still */
+@media (prefers-reduced-motion:reduce){
+  .fx-ic svg,.fx-auto,.fx-mono.done{animation:none}
+  .fx-shimmer .tu{animation:none}
+  .fx-mono .mp{animation:none;stroke-dashoffset:0}
+  .fx-mono .md{animation:none;opacity:1}
+  .fx-mono .mg{animation:none;opacity:.55}
+}

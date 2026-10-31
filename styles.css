@@ -521,3 +521,14 @@ em{font-style:italic;font-family:var(--serif);color:var(--gold-2)}
 .launch-note[hidden]{display:none}
 @media (max-width:560px){.launch-note{font-size:16px;max-width:30em;padding:0 6px}}
 @media (max-height:720px){.launch-title{margin-top:16px}.launch-sub{margin-top:18px}.launch-date{margin-top:18px}.launch-note{margin-top:10px}.launch-links{margin-top:18px}}
+
+/* ============ background film v7 (countdown + hero) ============ */
+.mm-film{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:var(--ink) 50% 50%/cover no-repeat}
+.mm-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;display:block;opacity:0;transition:opacity 1.2s}
+.mm-film video.on{opacity:1}
+.mm-film::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none}
+.launch-film{transition:opacity .9s var(--ease)}
+.launch-film::after{background:radial-gradient(ellipse 62% 52% at 50% 50%,rgba(6,8,15,.54),rgba(6,8,15,.32) 72%,rgba(6,8,15,.5) 100%)}
+.launch.opening .launch-film,.launch.open .launch-film{opacity:0}
+.hero-film::after{background:linear-gradient(90deg,rgba(6,8,15,.80) 0%,rgba(6,8,15,.55) 48%,rgba(6,8,15,.32) 100%),linear-gradient(180deg,rgba(6,8,15,.35) 0%,rgba(6,8,15,0) 22%,rgba(6,8,15,0) 72%,var(--ink) 100%)}
+@media (max-width:1080px){.hero-film::after{background:linear-gradient(180deg,rgba(6,8,15,.62),rgba(6,8,15,.5) 50%,var(--ink) 100%)}}

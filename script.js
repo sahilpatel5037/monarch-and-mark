@@ -63,6 +63,12 @@
   function intro() { root.classList.add("ready"); }
   if (window.MM_COUNTDOWN) document.addEventListener("mm:launched", function () { setTimeout(intro, 60); });
   else requestAnimationFrame(function () { requestAnimationFrame(intro); });
+  /* hero background film: starts once the countdown is gone (no download while the countdown covers it) */
+  var heroFilmBox = hero && hero.querySelector(".hero-film");
+  if (window.MMFilm && heroFilmBox) {
+    if (window.MM_COUNTDOWN) document.addEventListener("mm:launched", function () { window.MMFilm(heroFilmBox); });
+    else window.MMFilm(heroFilmBox);
+  }
   if (window.MMDust && hero) window.MMDust(hero.querySelector(".hero-dust"), { max: fine ? 80 : 40, density: 16000, mouseTarget: hero });
 
   var stage = document.querySelector(".hero-stage");
