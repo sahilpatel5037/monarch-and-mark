@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Pay | Monarch &amp; Mark</title>
-<meta name="description" content="Pay Monarch &amp; Mark: UPI QR and UPI ID for clients in India, Wise invoice for clients outside India.">
+<meta name="description" content="Pay Monarch &amp; Mark: UPI QR for clients in India, Wise invoice for clients outside India.">
 <meta name="theme-color" content="#070A12">
 <meta name="robots" content="noindex">
 <meta property="og:type" content="website">
@@ -28,16 +28,30 @@
 .pay-card h2{font:500 34px/1.05 var(--serif);margin-bottom:8px}
 .pay-card .tag{display:inline-block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .pay-card p{color:var(--muted);margin:0 0 18px}
-.upi-top{display:flex;gap:26px;align-items:flex-start}
-.qr{flex:none;width:220px;background:#fff;border-radius:16px;padding:10px;box-shadow:0 20px 50px -25px rgba(0,0,0,.9)}
-.qr img{width:100%;height:auto;image-rendering:pixelated}
-.qr-cap{font-size:12px;color:#5b6170;text-align:center;margin-top:8px;letter-spacing:.06em}
+.upi-top{display:flex;gap:28px;align-items:flex-start}
+.qr-frame{flex:none;width:268px;position:relative;border-radius:22px;padding:1.5px;background:linear-gradient(145deg,var(--gold-2),var(--gold-deep) 45%,var(--gold) 70%,var(--gold-2));box-shadow:0 0 0 1px rgba(196,161,98,.15),0 0 46px -6px rgba(196,161,98,.45),0 30px 60px -30px rgba(0,0,0,.95);animation:qrglow 4.5s ease-in-out infinite}
+@keyframes qrglow{0%,100%{box-shadow:0 0 0 1px rgba(196,161,98,.15),0 0 38px -8px rgba(196,161,98,.35),0 30px 60px -30px rgba(0,0,0,.95)}50%{box-shadow:0 0 0 1px rgba(196,161,98,.25),0 0 58px -4px rgba(228,202,146,.55),0 30px 60px -30px rgba(0,0,0,.95)}}
+@media (prefers-reduced-motion:reduce){.qr-frame{animation:none}}
+.qr-in{border-radius:20.5px;background:radial-gradient(120% 80% at 50% 0%,#17223f,#0A1020 70%);padding:16px 16px 14px;text-align:center}
+.qr-brand{display:flex;align-items:center;justify-content:center;gap:9px;margin:0 0 12px;font:600 11px/1 var(--sans);letter-spacing:.26em;text-transform:uppercase;color:var(--gold-2)}
+.qr-brand img{width:20px;height:auto}
+.qr-brand i{flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--hair));font-style:normal}
+.qr-brand i:last-child{background:linear-gradient(90deg,var(--hair),transparent)}
+.qr{position:relative;background:#fff;border-radius:14px;padding:10px;line-height:0}
+.qr img{width:100%;height:auto;display:block}
+.qr::before,.qr::after,.qr i::before,.qr i::after{content:"";position:absolute;width:18px;height:18px;border:2px solid var(--gold);pointer-events:none}
+.qr::before{top:-6px;left:-6px;border-right:0;border-bottom:0;border-radius:8px 0 0 0}
+.qr::after{top:-6px;right:-6px;border-left:0;border-bottom:0;border-radius:0 8px 0 0}
+.qr i::before{bottom:-6px;left:-6px;border-right:0;border-top:0;border-radius:0 0 0 8px}
+.qr i::after{bottom:-6px;right:-6px;border-left:0;border-top:0;border-radius:0 0 8px 0}
+.qr-cap{font:500 15px/1.2 var(--serif);font-style:italic;color:var(--text);margin:14px 0 10px;letter-spacing:.02em}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.chips span{font:600 10.5px/1 var(--sans);letter-spacing:.08em;color:var(--muted);border:1px solid var(--hair);border-radius:999px;padding:6px 9px;background:rgba(196,161,98,.06)}
 .upi-side{flex:1;min-width:0}
-.idbox{display:flex;align-items:center;gap:10px;border:1px solid var(--hair);border-radius:14px;padding:10px 10px 10px 16px;background:rgba(6,8,15,.5);margin-bottom:8px}
-.idbox code{flex:1;min-width:0;font:600 16px/1.3 var(--sans);color:var(--text);word-break:break-all}
-.copy{flex:none;border:0;cursor:pointer;background:var(--gold);color:var(--ink);font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;border-radius:999px}
-.copy:hover{background:var(--gold-2)}
-.copy.ok{background:#7FB98A}
+.payee{border:1px solid var(--hair);border-radius:14px;padding:14px 16px;background:rgba(6,8,15,.5);margin:0 0 16px;display:flex;align-items:center;gap:12px}
+.payee img{width:34px;height:auto;flex:none}
+.payee small{display:block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-bottom:3px}
+.payee b{display:block;font:500 22px/1.1 var(--serif);color:var(--text)}
 .small{font-size:13px;color:var(--faint);margin:0 0 18px}
 .field{display:block;margin:0 0 14px}
 .field span{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
@@ -57,11 +71,12 @@
 .pay-note{margin-top:28px;font-size:13px;color:var(--faint);max-width:760px}
 .nav-links a.on{color:var(--text)}
 @media (max-width:980px){.pay-grid{grid-template-columns:1fr}}
+@media (min-width:981px) and (max-width:1180px){.upi-top{flex-direction:column;align-items:center}.upi-side{width:100%}}
 @media (max-width:640px){
   .pay{padding:100px 0 70px}
   .pay-card{padding:22px}
   .upi-top{flex-direction:column;align-items:center;gap:18px}
-  .qr{width:min(250px,80vw)}
+  .qr-frame{width:min(290px,84vw)}
   .upi-side{width:100%}
 }
 </style>
@@ -99,16 +114,18 @@
     <div class="pay-grid">
       <div class="pay-card" id="upi">
         <span class="tag">India &middot; UPI</span>
-        <h2>Scan or pay by UPI</h2>
+        <h2>Scan &amp; pay</h2>
         <div class="upi-top">
-          <div class="qr">
-            <img src="/pay/upi-qr.png" alt="UPI QR code for sahilpatel5037-2@okicici" width="516" height="516">
-            <div class="qr-cap">Scan with any UPI app</div>
+          <div class="qr-frame">
+            <div class="qr-in">
+              <div class="qr-brand"><i></i><img src="/assets/monarch-mark.png" alt="" width="320" height="335">Monarch &amp; Mark<i></i></div>
+              <div class="qr"><i></i><img src="/pay/upi-qr-v2.png" alt="Monarch &amp; Mark UPI payment QR code" width="848" height="848"></div>
+              <div class="qr-cap">Scan with any UPI app</div>
+              <div class="chips" aria-label="Works with"><span>GPay</span><span>PhonePe</span><span>Paytm</span><span>BHIM</span><span>Bank apps</span></div>
+            </div>
           </div>
           <div class="upi-side">
-            <p class="small" style="margin:0 0 8px">UPI ID</p>
-            <div class="idbox"><code id="upi-id">sahilpatel5037-2@okicici</code><button class="copy" type="button" id="copy-upi" data-copy="sahilpatel5037-2@okicici">Copy</button></div>
-            <p class="small">Works with Google Pay, PhonePe, Paytm, BHIM and bank apps.</p>
+            <div class="payee"><img src="/assets/monarch-mark.png" alt="" width="320" height="335"><div><small>Paying</small><b>Monarch &amp; Mark</b></div></div>
             <label class="field"><span>Amount (optional)</span><div class="amt"><b>&#8377;</b><input id="amt" type="text" inputmode="decimal" placeholder="e.g. 5000" autocomplete="off"></div></label>
             <label class="field"><span>Note (your name or order)</span><input id="note" type="text" maxlength="60" placeholder="e.g. Rahul, logo order" autocomplete="off"></label>
             <a class="btn btn-gold pay-btn" id="upi-link" href="upi://pay?pa=sahilpatel5037-2@okicici&amp;pn=Monarch%20%26%20Mark&amp;cu=INR">Pay with UPI app</a>
@@ -121,7 +138,7 @@
         <span class="tag">How it works</span>
         <h2>Three steps</h2>
         <ol class="steps">
-          <li><strong>Pay the 50% advance</strong>Use the QR or UPI ID. Add your name or order in the note.</li>
+          <li><strong>Pay the 50% advance</strong>Scan the QR or tap &ldquo;Pay with UPI app&rdquo;. Add your name or order in the note.</li>
           <li><strong>Send the payment screenshot</strong>On Instagram DM <a href="https://www.instagram.com/monarchandmark.studio/" target="_blank" rel="noopener">@monarchandmark.studio</a> or by email to <a href="mailto:monarchmarkstudio@gmail.com?subject=Payment%20screenshot%20%E2%80%94%20Monarch%20%26%20Mark">monarchmarkstudio@gmail.com</a>.</li>
           <li><strong>Work starts</strong>We confirm the payment and begin. The balance is paid before final delivery.</li>
         </ol>
@@ -167,7 +184,7 @@
   function setOpen(o){d.body.classList.toggle("nav-open",o);t.setAttribute("aria-expanded",o?"true":"false");t.setAttribute("aria-label",o?"Close menu":"Open menu");}
   if(t)t.addEventListener("click",function(){setOpen(!d.body.classList.contains("nav-open"));});
   if(links)links.addEventListener("click",function(e){if(e.target.tagName==="A")setOpen(false);});
-  var PA="sahilpatel5037-2@okicici",PN="Monarch%20%26%20Mark";
+  var PA=["sahilpatel5037","-2","@okicici"].join(""),PN="Monarch%20%26%20Mark";
   var amt=d.getElementById("amt"),note=d.getElementById("note"),link=d.getElementById("upi-link");
   function build(){
     var u="upi://pay?pa="+PA+"&pn="+PN+"&cu=INR";
@@ -178,12 +195,6 @@
     link.textContent=(a&&parseFloat(a)>0)?"Pay \u20B9"+Number(a).toLocaleString("en-IN")+" with UPI app":"Pay with UPI app";
   }
   amt.addEventListener("input",build);note.addEventListener("input",build);build();
-  function copyText(txt,btn){
-    function ok(){btn.textContent="Copied";btn.classList.add("ok");setTimeout(function(){btn.textContent="Copy";btn.classList.remove("ok");},1800);}
-    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fallback();});}else fallback();
-    function fallback(){var ta=d.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";d.body.appendChild(ta);ta.select();try{d.execCommand("copy");ok();}catch(e){}d.body.removeChild(ta);}
-  }
-  var c=d.getElementById("copy-upi");c.addEventListener("click",function(){copyText(c.getAttribute("data-copy"),c);});
 })();
 </script>
 </body>
