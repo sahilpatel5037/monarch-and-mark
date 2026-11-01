@@ -121,8 +121,8 @@
     var v = function (n) { return form.elements[n].value.trim(); };
     var subject = "Project brief: " + v("service") + " (" + v("name") + ")";
     var body = "Name: " + v("name") + "\nEmail: " + v("email") + "\nService: " + v("service") + "\nPackage: " + v("plan") + "\n\n" + v("message");
-    window.location.href = "mailto:sahilpatel5037@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    if (note) note.textContent = "Your email app should open with the brief ready to send. If it doesn't, write to sahilpatel5037@gmail.com.";
+    window.location.href = "mailto:monarchmarkstudio@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    if (note) note.textContent = "Your email app should open with the brief ready to send. If it doesn't, write to monarchmarkstudio@gmail.com.";
   });
 
   document.querySelectorAll("[data-copy]").forEach(function (b) {
