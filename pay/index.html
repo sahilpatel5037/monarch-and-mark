@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pay | Monarch &amp; Mark</title>
+<meta name="description" content="Pay Monarch &amp; Mark: UPI QR and UPI ID for clients in India, Wise invoice for clients outside India.">
+<meta name="theme-color" content="#070A12">
+<meta name="robots" content="noindex">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Monarch &amp; Mark">
+<meta property="og:title" content="Pay Monarch &amp; Mark">
+<meta property="og:description" content="UPI for India, Wise invoice for international clients.">
+<meta property="og:image" content="/og.png">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/CormorantGaramond-normal-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/Manrope-normal-400-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/fonts.css?v=hub1">
+<link rel="stylesheet" href="/styles.css?v=v8">
+<style>
+.pay{padding:130px 0 90px;position:relative}
+.pay::before{content:"";position:absolute;inset:0 0 auto;height:520px;background:radial-gradient(60% 70% at 50% 0%,rgba(196,161,98,.14),transparent 70%);pointer-events:none}
+.pay .sec-head{margin-bottom:40px}
+.pay-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:start}
+.pay-card{border-radius:22px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(15,24,48,.85),rgba(10,16,32,.65));padding:30px}
+.pay-card h2{font:500 34px/1.05 var(--serif);margin-bottom:8px}
+.pay-card .tag{display:inline-block;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.pay-card p{color:var(--muted);margin:0 0 18px}
+.upi-top{display:flex;gap:26px;align-items:flex-start}
+.qr{flex:none;width:220px;background:#fff;border-radius:16px;padding:10px;box-shadow:0 20px 50px -25px rgba(0,0,0,.9)}
+.qr img{width:100%;height:auto;image-rendering:pixelated}
+.qr-cap{font-size:12px;color:#5b6170;text-align:center;margin-top:8px;letter-spacing:.06em}
+.upi-side{flex:1;min-width:0}
+.idbox{display:flex;align-items:center;gap:10px;border:1px solid var(--hair);border-radius:14px;padding:10px 10px 10px 16px;background:rgba(6,8,15,.5);margin-bottom:8px}
+.idbox code{flex:1;min-width:0;font:600 16px/1.3 var(--sans);color:var(--text);word-break:break-all}
+.copy{flex:none;border:0;cursor:pointer;background:var(--gold);color:var(--ink);font:700 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;border-radius:999px}
+.copy:hover{background:var(--gold-2)}
+.copy.ok{background:#7FB98A}
+.small{font-size:13px;color:var(--faint);margin:0 0 18px}
+.field{display:block;margin:0 0 14px}
+.field span{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field input{width:100%;font:500 16px/1.2 var(--sans);color:var(--text);background:rgba(6,8,15,.6);border:1px solid var(--line);border-radius:12px;padding:14px 16px;outline:none}
+.field input:focus{border-color:var(--gold)}
+.amt{position:relative}.amt b{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--gold-2);font-weight:600}
+.amt input{padding-left:34px}
+.pay-btn{width:100%;margin-top:6px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 18px 50px;color:var(--muted)}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;border:1px solid var(--hair);display:grid;place-items:center;font:600 18px/1 var(--serif);color:var(--gold-2)}
+.steps li strong{color:var(--text);display:block;font-weight:600}
+.steps a{color:var(--gold-2)}
+.intl{margin-top:28px}
+.intl a{color:var(--gold-2)}
+.pay-note{margin-top:28px;font-size:13px;color:var(--faint);max-width:760px}
+.nav-links a.on{color:var(--text)}
+@media (max-width:980px){.pay-grid{grid-template-columns:1fr}}
+@media (max-width:640px){
+  .pay{padding:100px 0 70px}
+  .pay-card{padding:22px}
+  .upi-top{flex-direction:column;align-items:center;gap:18px}
+  .qr{width:min(250px,80vw)}
+  .upi-side{width:100%}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="nav scrolled" id="top">
+  <div class="nav-in wrap">
+    <a class="brand" href="/" aria-label="Monarch &amp; Mark, home">
+      <img src="/assets/monarch-mark.png" alt="" width="34" height="36">
+      <span class="brand-word">Monarch <i>&amp;</i> Mark</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="Main">
+      <a href="/#work">Work</a>
+      <a href="/#services">Services</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/pay/" class="on" aria-current="page">Pay</a>
+      <a href="/#contact" class="nav-cta">Start a project</a>
+    </nav>
+    <button class="nav-toggle" type="button" aria-controls="nav-links" aria-expanded="false" aria-label="Open menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="main">
+<section class="pay">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">Payments</p>
+      <h2>Pay <em>Monarch &amp; Mark</em></h2>
+      <p class="sec-lede">Work starts with a 50% advance. The rest is due before final files are delivered.</p>
+    </header>
+
+    <div class="pay-grid">
+      <div class="pay-card" id="upi">
+        <span class="tag">India &middot; UPI</span>
+        <h2>Scan or pay by UPI</h2>
+        <div class="upi-top">
+          <div class="qr">
+            <img src="/pay/upi-qr.png" alt="UPI QR code for sahilpatel5037-2@okicici" width="516" height="516">
+            <div class="qr-cap">Scan with any UPI app</div>
+          </div>
+          <div class="upi-side">
+            <p class="small" style="margin:0 0 8px">UPI ID</p>
+            <div class="idbox"><code id="upi-id">sahilpatel5037-2@okicici</code><button class="copy" type="button" id="copy-upi" data-copy="sahilpatel5037-2@okicici">Copy</button></div>
+            <p class="small">Works with Google Pay, PhonePe, Paytm, BHIM and bank apps.</p>
+            <label class="field"><span>Amount (optional)</span><div class="amt"><b>&#8377;</b><input id="amt" type="text" inputmode="decimal" placeholder="e.g. 5000" autocomplete="off"></div></label>
+            <label class="field"><span>Note (your name or order)</span><input id="note" type="text" maxlength="60" placeholder="e.g. Rahul, logo order" autocomplete="off"></label>
+            <a class="btn btn-gold pay-btn" id="upi-link" href="upi://pay?pa=sahilpatel5037-2@okicici&amp;pn=Monarch%20%26%20Mark&amp;cu=INR">Pay with UPI app</a>
+            <p class="small" style="margin:10px 0 0">The button opens your UPI app on a phone. On a computer, scan the QR instead.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pay-card">
+        <span class="tag">How it works</span>
+        <h2>Three steps</h2>
+        <ol class="steps">
+          <li><strong>Pay the 50% advance</strong>Use the QR or UPI ID. Add your name or order in the note.</li>
+          <li><strong>Send the payment screenshot</strong>On Instagram DM <a href="https://www.instagram.com/monarchandmark.studio/" target="_blank" rel="noopener">@monarchandmark.studio</a> or by email to <a href="mailto:monarchmarkstudio@gmail.com?subject=Payment%20screenshot%20%E2%80%94%20Monarch%20%26%20Mark">monarchmarkstudio@gmail.com</a>.</li>
+          <li><strong>Work starts</strong>We confirm the payment and begin. The balance is paid before final delivery.</li>
+        </ol>
+        <div class="intl">
+          <span class="tag">Outside India</span>
+          <p>Clients outside India: we send a Wise payment request or invoice. Email <a href="mailto:monarchmarkstudio@gmail.com?subject=International%20payment%20%E2%80%94%20Monarch%20%26%20Mark">monarchmarkstudio@gmail.com</a> with your project and currency.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="pay-note">Please only pay an amount we have agreed with you in writing. Questions about a payment? Email monarchmarkstudio@gmail.com.</p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a class="brand" href="/"><img src="/assets/monarch-mark.png" alt="" width="34" height="36" loading="lazy"><span class="brand-word">Monarch <i>&amp;</i> Mark</span></a>
+      <p>Independent creative studio for YouTube, video, websites, Roblox, Discord and social content.</p>
+    </div>
+    <nav class="foot-col" aria-label="Studio">
+      <h2>Studio</h2>
+      <a href="/#work">Work</a><a href="/#services">Services</a><a href="/#pricing">Pricing</a><a href="/#about">About</a><a href="/#contact">Contact</a><a href="/pay/">Pay</a>
+    </nav>
+    <nav class="foot-col" aria-label="Our work">
+      <h2>Our work</h2>
+      <a href="https://afterdark-archives.sites.tab.bot/" target="_blank" rel="noopener">AfterDark Archives</a><a href="https://www.roblox.com/games/91110462194238" target="_blank" rel="noopener">DON&rsquo;T ANSWER</a><a href="https://niftynine.sites.tab.bot/" target="_blank" rel="noopener">Nifty Nine</a><a href="https://radhe-casters.vercel.app/" target="_blank" rel="noopener">Radhe Casters</a><a href="https://sahntro.sites.tab.bot/" target="_blank" rel="noopener">SAHNTRO</a>
+    </nav>
+    <nav class="foot-col" aria-label="Contact">
+      <h2>Contact</h2>
+      <a href="mailto:monarchmarkstudio@gmail.com">Email</a><a href="https://www.instagram.com/monarchandmark.studio/" target="_blank" rel="noopener">Instagram</a><a href="https://www.fiverr.com/sahilpatel420" target="_blank" rel="noopener">Fiverr</a>
+    </nav>
+  </div>
+  <div class="wrap foot-base"><span>&copy; <span id="yr">2026</span> Monarch &amp; Mark. All rights reserved.</span><a href="#top">Back to top &uarr;</a></div>
+</footer>
+
+<script>
+(function(){
+  var d=document,root=d.documentElement;root.classList.remove("no-js");root.classList.add("js");
+  var y=d.getElementById("yr");if(y)y.textContent=new Date().getFullYear();
+  var t=d.querySelector(".nav-toggle"),links=d.getElementById("nav-links");
+  function setOpen(o){d.body.classList.toggle("nav-open",o);t.setAttribute("aria-expanded",o?"true":"false");t.setAttribute("aria-label",o?"Close menu":"Open menu");}
+  if(t)t.addEventListener("click",function(){setOpen(!d.body.classList.contains("nav-open"));});
+  if(links)links.addEventListener("click",function(e){if(e.target.tagName==="A")setOpen(false);});
+  var PA="sahilpatel5037-2@okicici",PN="Monarch%20%26%20Mark";
+  var amt=d.getElementById("amt"),note=d.getElementById("note"),link=d.getElementById("upi-link");
+  function build(){
+    var u="upi://pay?pa="+PA+"&pn="+PN+"&cu=INR";
+    var a=(amt.value||"").replace(/[^0-9.]/g,"");
+    if(a&&parseFloat(a)>0){a=(Math.round(parseFloat(a)*100)/100).toFixed(2);u+="&am="+a;}
+    var n=(note.value||"").trim();if(n)u+="&tn="+encodeURIComponent(n);
+    link.setAttribute("href",u);
+    link.textContent=(a&&parseFloat(a)>0)?"Pay \u20B9"+Number(a).toLocaleString("en-IN")+" with UPI app":"Pay with UPI app";
+  }
+  amt.addEventListener("input",build);note.addEventListener("input",build);build();
+  function copyText(txt,btn){
+    function ok(){btn.textContent="Copied";btn.classList.add("ok");setTimeout(function(){btn.textContent="Copy";btn.classList.remove("ok");},1800);}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok,function(){fallback();});}else fallback();
+    function fallback(){var ta=d.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";d.body.appendChild(ta);ta.select();try{d.execCommand("copy");ok();}catch(e){}d.body.removeChild(ta);}
+  }
+  var c=d.getElementById("copy-upi");c.addEventListener("click",function(){copyText(c.getAttribute("data-copy"),c);});
+})();
+</script>
+</body>
+</html>
