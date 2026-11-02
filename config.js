@@ -4,10 +4,10 @@
    Format: YYYY-MM-DDTHH:MM:SS+05:30  (the +05:30 means India time, IST).
    Preview the full site any time with ?preview=1 at the end of the address. */
 window.MM_CONFIG = {
-  LAUNCH_AT: "2026-11-15T10:00:00+05:30",
+  LAUNCH_AT: "2026-11-02T08:00:00+05:30",
 
   /* Small line shown under the countdown (countdown screen only). Leave empty "" to hide it. */
-  LAUNCH_NOTE: "We're taking a little extra time to bring you a brand-new look and an even better experience. See you after Diwali — 15 November.",
+  LAUNCH_NOTE: "Opening today at 8:00 AM.",
 
   /* WhatsApp chat button: put the number with country code, digits only (e.g. "91XXXXXXXXXX").
      Leave empty to hide the button on the live site. */
