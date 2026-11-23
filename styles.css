@@ -532,3 +532,21 @@ em{font-style:italic;font-family:var(--serif);color:var(--gold-2)}
 .launch.opening .launch-film,.launch.open .launch-film{opacity:0}
 .hero-film::after{background:linear-gradient(90deg,rgba(6,8,15,.80) 0%,rgba(6,8,15,.55) 48%,rgba(6,8,15,.32) 100%),linear-gradient(180deg,rgba(6,8,15,.35) 0%,rgba(6,8,15,0) 22%,rgba(6,8,15,0) 72%,var(--ink) 100%)}
 @media (max-width:1080px){.hero-film::after{background:linear-gradient(180deg,rgba(6,8,15,.62),rgba(6,8,15,.5) 50%,var(--ink) 100%)}}
+
+/* Brief and service clarity, using the existing studio palette. */
+.svc-enquiry{margin-top:24px;padding-top:18px;border-top:1px solid rgba(193,158,93,.22)}
+.svc-enquiry p{font-size:13px;line-height:1.7;margin-bottom:12px}
+.case-note{display:grid;gap:12px;margin:22px 0;padding:18px 0;border-top:1px solid rgba(193,158,93,.22);border-bottom:1px solid rgba(193,158,93,.22)}
+.case-note dt{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#c6a25f;margin-bottom:5px}
+.case-note dd{margin:0;font-size:13px;line-height:1.75;color:#aaa8a3}
+.brief-note{line-height:1.7} .field [aria-invalid="true"]{border-color:#dc9b84}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#copy-brief{background:transparent;color:#d3b477;border:1px solid rgba(193,158,93,.5)}
+#copy-brief:hover{background:rgba(193,158,93,.12)}
+.brief-note{color:#aaa8a3}
+/* Readable supporting copy on the near-black and navy surfaces. */
+.svc p,.svc-enquiry p,.card-body>p:not(.tag),.case-note dd,.plan-for,.plan-list,.sec-lede{color:#b9b8b3}
+.chips li{color:#b9b8b3;border-color:rgba(185,184,179,.25)}
+.tag,.field label{color:#b5b4af}
+.brief-note{font-size:12px;color:#b9b8b3}
+input::placeholder,textarea::placeholder{color:#a7a6a1;opacity:1}

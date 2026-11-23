@@ -110,19 +110,43 @@
     b.addEventListener("click", function () { if (planSel) planSel.value = b.getAttribute("data-plan"); });
   });
 
-  /* brief form -> email */
+  var serviceSel = document.getElementById("f-svc");
+  document.querySelectorAll("[data-service]").forEach(function (a) {
+    a.addEventListener("click", function () {
+      if (serviceSel) serviceSel.value = a.getAttribute("data-service");
+      if (planSel) planSel.value = "Not sure yet";
+    });
+  });
+
+  /* Brief preparation is an explicit handoff, never a submission receipt. */
   var form = document.getElementById("brief");
   if (form) form.addEventListener("submit", function (e) {
     e.preventDefault();
     var bad = null;
-    form.querySelectorAll("[required]").forEach(function (f) { var ok = f.value.trim() && (f.type !== "email" || /.+@.+\..+/.test(f.value)); f.classList.toggle("err", !ok); if (!ok && !bad) bad = f; });
+    form.querySelectorAll("[required]").forEach(function (f) { var ok = f.value.trim() && f.checkValidity(); f.classList.toggle("err", !ok); f.setAttribute("aria-invalid", String(!ok)); if (!ok && !bad) bad = f; });
     var note = form.querySelector(".brief-note");
     if (bad) { bad.focus(); if (note) note.textContent = "Please fill in your name, a valid email and a few words about the project."; return; }
     var v = function (n) { return form.elements[n].value.trim(); };
     var subject = "Project brief: " + v("service") + " (" + v("name") + ")";
     var body = "Name: " + v("name") + "\nEmail: " + v("email") + "\nService: " + v("service") + "\nPackage: " + v("plan") + "\n\n" + v("message");
     window.location.href = "mailto:monarchmarkstudio@gmail.com?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
-    if (note) note.textContent = "Your email app should open with the brief ready to send. If it doesn't, write to monarchmarkstudio@gmail.com.";
+    if (note) note.textContent = "Email draft requested, not sent yet. Press Send in your email app. If no app opens, use Copy brief instead and paste it into an email or WhatsApp.";
+  });
+
+  var copyBrief = document.getElementById("copy-brief");
+  if (copyBrief && form) copyBrief.addEventListener("click", function () {
+    var v = function (n) { return form.elements[n].value.trim(); };
+    var text = "Project brief for Monarch & Mark\nName: " + v("name") + "\nEmail: " + v("email") + "\nService: " + v("service") + "\nPackage: " + v("plan") + "\n\n" + v("message");
+    var note = form.querySelector(".brief-note");
+    if (!navigator.clipboard || !navigator.clipboard.writeText) {
+      if (note) note.textContent = "Copy is not available in this browser. Select your brief text and email it to monarchmarkstudio@gmail.com.";
+      return;
+    }
+    navigator.clipboard.writeText(text).then(function () {
+      if (note) note.textContent = "Brief copied, not sent. Paste it into an email to monarchmarkstudio@gmail.com or the studio WhatsApp chat, then press Send.";
+    }, function () {
+      if (note) note.textContent = "Clipboard access was blocked. Your form is still here. You can email monarchmarkstudio@gmail.com directly.";
+    });
   });
 
   document.querySelectorAll("[data-copy]").forEach(function (b) {
